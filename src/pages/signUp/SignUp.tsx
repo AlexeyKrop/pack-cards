@@ -1,16 +1,29 @@
 import React from 'react';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'antd';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
 
 type IFormInput = {
   email: string;
   password: string;
-  iceCreamType: { label: string; value: string };
 };
+const schema = yup
+  .object({
+    email: yup.string().required(),
+    password: yup.string().required(),
+  })
+  .required();
 
 export const SignUp: React.FC = () => {
-  const { control, handleSubmit } = useForm<IFormInput>();
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data);
@@ -24,12 +37,14 @@ export const SignUp: React.FC = () => {
         defaultValue=""
         render={({ field }) => <Input placeholder="email" {...field} />}
       />
+      <p>{errors.email?.message}</p>
       <Controller
         name="password"
         control={control}
         defaultValue=""
-        render={({ field }) => <Input.Password {...field} placeholder="input password" />}
+        render={({ field }) => <Input.Password placeholder="input password" {...field} />}
       />
+      <p>{errors.password?.message}</p>
       <input type="submit" />
     </form>
   );
