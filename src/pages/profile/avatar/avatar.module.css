@@ -1,0 +1,40 @@
+.block{
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+.circle{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    width: 32px;
+    height: 32px;
+
+    background: #808080;
+    border: 1px solid #FFFFFF;
+    border-radius: 50%;
+}
+.circle:hover{
+    background-color: #366EFF;
+}
+
+.btn{
+    cursor: pointer;
+
+    display: inherit;
+
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.block span{
+    border-bottom: 1px dashed #000000;
+}
+

@@ -5,6 +5,9 @@ import { Input } from 'antd';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
+import { setRegistrationTC } from '../../store/reducers/signUpReducer';
+
 import s from './signUp.module.css';
 
 type IFormInput = {
@@ -25,6 +28,8 @@ const schema = yup
   .required();
 
 export const SignUp: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const {
     control,
     formState: { errors },
@@ -34,7 +39,7 @@ export const SignUp: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data);
+    dispatch(setRegistrationTC(data));
   };
 
   return (

@@ -1,16 +1,17 @@
 import React from 'react';
 
 import './App.css';
-import { Login } from './pages/login/Login';
-import { SignUp } from './pages/signUp/SignUp';
+import { HashRouter } from 'react-router-dom';
+
+import Header from './components/header/Header';
+import { Pages } from './routing/Pages';
 
 const App: React.FC = () => {
   return (
-    <>
-      {' '}
-      <SignUp />
-      <Login />
-    </>
+    <HashRouter>
+      <Header />
+      <Pages />
+    </HashRouter>
   );
 };
 

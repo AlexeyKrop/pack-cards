@@ -6,10 +6,14 @@ import {
 } from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
 
+import { authReducer } from './reducers/authReducer';
+import { profileReducer } from './reducers/profileReducer';
 import { signUpReducer } from './reducers/signUpReducer';
 
 const rootReducer = combineReducers({
   registration: signUpReducer,
+  auth: authReducer,
+  profile: profileReducer,
 });
 
 export const store = configureStore({

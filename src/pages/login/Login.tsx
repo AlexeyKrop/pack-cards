@@ -3,8 +3,14 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { Input } from 'antd';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
+import { PATH } from '../../routing/Pages';
+import { loginTC } from '../../store/reducers/authReducer';
+import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
 import s from '../signUp/signUp.module.css';
 
 type IFormInput = {
@@ -20,6 +26,8 @@ const schema = yup
   .required();
 
 export const Login: React.FC = () => {
+  const isLoggedIn = useAppSelector(selectLoggedIn);
+  const dispatch = useAppDispatch();
   const {
     register,
     control,
@@ -30,8 +38,12 @@ export const Login: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data);
+    dispatch(loginTC(data));
   };
+
+  if (isLoggedIn) {
+    return <Navigate to={PATH.PROFILE} />;
+  }
 
   return (
     <div className={s.wrapper}>
