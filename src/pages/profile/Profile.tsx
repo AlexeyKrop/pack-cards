@@ -8,6 +8,7 @@ import { EditableSpan } from '../../components/editableSpan/EditableSpan';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
+import { logoutTC } from '../../store/reducers/authReducer';
 import { updateUserProfileTC } from '../../store/reducers/profileReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
 import { selectUser } from '../../store/selectors/selectUser';
@@ -18,11 +19,12 @@ import s from './profile.module.css';
 const Profile: React.FC = () => {
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const user = useAppSelector(selectUser);
-
-  console.log(user);
   const dispatch = useAppDispatch();
-  const changeUserNameValue: (name: string, avatar?: string) => void = name => {
+  const updateUserNameValue: (name: string, avatar?: string) => void = name => {
     dispatch(updateUserProfileTC(name));
+  };
+  const handleLogout: () => void = () => {
+    dispatch(logoutTC());
   };
 
   if (!isLoggedIn) {
@@ -34,9 +36,9 @@ const Profile: React.FC = () => {
       <div className={s.content}>
         <h2 className={s.title}>Personal Information</h2>
         <Avatar mode="profile" width="96px" />
-        <EditableSpan callBack={changeUserNameValue} title={user.name} />
+        <EditableSpan callBack={updateUserNameValue} title={user.name} />
         <p>{user.email}</p>
-        <Button type="default" icon={<LoginOutlined />} onClick={() => console.log()}>
+        <Button type="default" icon={<LoginOutlined />} onClick={handleLogout}>
           Log out
         </Button>
       </div>

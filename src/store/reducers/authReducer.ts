@@ -33,3 +33,6 @@ export const loginTC =
       dispatch(setIsLoggedIn({ value: true }));
     });
   };
+export const logoutTC = (): AppThunk => dispatch => {
+  authAPI.logout().then(() => dispatch(setIsLoggedIn({ value: false })));
+};
