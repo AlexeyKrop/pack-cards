@@ -1,0 +1,26 @@
+.wrapper{
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.btn{
+    position: absolute;
+    top: 2px;
+    right: 35px;
+    outline: none;
+    border: none;
+    background: #1890ff;
+    color: #FFFFFF;
+}
+
+.group{
+    width: 100%;
+    max-width: 270px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgba(0, 0, 0, .2);
+}
