@@ -78,3 +78,19 @@
 .inputBtn:hover {
     transition: 0.3s all;
 }
+
+.checkbox{
+    display: flex;
+    align-items: center;
+}
+.checkbox input{
+    cursor: pointer;
+
+    margin-right: 8px;
+}
+.checkbox span{
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #000000;
+}
