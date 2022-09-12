@@ -5,8 +5,10 @@ import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
 import { EditableSpan } from '../../components/editableSpan/EditableSpan';
+import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
+import { updateUserProfileTC } from '../../store/reducers/profileReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
 import { selectUser } from '../../store/selectors/selectUser';
 
@@ -16,8 +18,11 @@ import s from './profile.module.css';
 const Profile: React.FC = () => {
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const user = useAppSelector(selectUser);
-  const changeUserNameValue: (name: string, avatar?: string) => void = (name, avatar) => {
-    console.log(name, avatar);
+
+  console.log(user);
+  const dispatch = useAppDispatch();
+  const changeUserNameValue: (name: string, avatar?: string) => void = name => {
+    dispatch(updateUserProfileTC(name));
   };
 
   if (!isLoggedIn) {

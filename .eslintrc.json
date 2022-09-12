@@ -75,7 +75,7 @@
             { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
         ],
         "no-shadow": "off",
-        "no-debugger": "error",
+        "no-debugger": "off",
         "no-unused-vars": "off",
         "no-magic-numbers": [
             "error",

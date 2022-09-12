@@ -15,8 +15,14 @@ export const authAPI = {
   me() {
     return instance.post<UserType>(`/auth/me`);
   },
-  update() {
-    return instance.post<UpdateUserType, AxiosResponse<UserType>>(`/auth/me`);
+  update(name: string, avatar?: string) {
+    return instance.put<UpdateUserType, AxiosResponse<UpdateUserResponseType>>(
+      `/auth/me`,
+      {
+        name,
+        avatar,
+      },
+    );
   },
 };
 // TYPE
@@ -45,4 +51,8 @@ export type LogOutResponseType = {
 export type UpdateUserType = {
   name: string;
   avatar: string; // url or base64
+};
+export type UpdateUserResponseType = {
+  updatedUser: UserType;
+  error?: string;
 };
