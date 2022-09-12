@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
 
+import { appReducer } from './reducers/appReducer';
 import { authReducer } from './reducers/authReducer';
 import { profileReducer } from './reducers/profileReducer';
 import { signUpReducer } from './reducers/signUpReducer';
@@ -13,6 +14,7 @@ import { signUpReducer } from './reducers/signUpReducer';
 const rootReducer = combineReducers({
   registration: signUpReducer,
   auth: authReducer,
+  app: appReducer,
   profile: profileReducer,
 });
 

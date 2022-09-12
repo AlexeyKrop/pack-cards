@@ -13,7 +13,7 @@ export const authAPI = {
     return instance.delete<AxiosResponse<LogOutResponseType>>(`auth/me`);
   },
   me() {
-    return instance.post<AxiosResponse<UserType>>(`/auth/me`);
+    return instance.post<UserType>(`/auth/me`);
   },
   update() {
     return instance.post<UpdateUserType, AxiosResponse<UserType>>(`/auth/me`);
