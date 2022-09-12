@@ -1,0 +1,80 @@
+.wrapper {
+    width: 100%;
+    max-width: 414px;
+    min-height: 414px;
+
+    text-align: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.content {
+    padding: 30px;
+}
+.input{
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.error {
+    position: absolute;
+    left: 0;
+    top: 31px;
+    margin-bottom: 0;
+
+    color: red;
+    text-align: left;
+}
+
+.text{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+
+    color: #000000;
+
+    opacity: 0.5;
+}
+
+.inputBtn {
+    cursor: pointer;
+
+    width: 100%;
+    max-width: 354px;
+    padding: 8px;
+
+    margin: 20px 0 30px 0;
+
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+
+    outline: none;
+
+    border: none;
+    background: #366EFF;
+    box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+}
+.inputBtn:hover,
+.inputBtn:hover {
+    background: #3639ff;
+}
+
+.inputBtn:active,
+.inputBtn:active,
+.inputBtn:active {
+    transition: 0.3s all;
+    transform: translateY(3px);
+    border: 1px solid transparent;
+    opacity: 0.8;
+}
+
+.inputBtn:disabled {
+    opacity: 0.4;
+}
+
+.inputBtn:hover {
+    transition: 0.3s all;
+}
