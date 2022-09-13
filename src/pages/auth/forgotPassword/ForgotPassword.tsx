@@ -3,10 +3,11 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { Input } from 'antd';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { forgotPasswordTC } from '../../../store/reducers/forgotPasswordReducer';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
@@ -21,10 +22,12 @@ const schema = yup
     email: yup.string().required(),
   })
   .required();
-const RESPONSE_MESSAGE_FOR_EMAIL = `<div>Перейдите по ссылке, чтобы восстановить пароль:<a href='/'>link</a></div>`;
+const RESPONSE_MESSAGE_FOR_EMAIL = `<div>Перейдите по ссылке, чтобы восстановить пароль:<a href='http://localhost:3000/#/create-password/$token$'>link</a></div>`;
 
 export const ForgotPassword: React.FC = () => {
+  const isSendEmail = useAppSelector(state => state.forgotPassword.isSendEmail);
   const dispatch = useAppDispatch();
+
   const {
     control,
     formState: { errors },
@@ -36,6 +39,10 @@ export const ForgotPassword: React.FC = () => {
   const onSubmit: SubmitHandler<IFormInput> = data => {
     dispatch(forgotPasswordTC(data.email, RESPONSE_MESSAGE_FOR_EMAIL));
   };
+
+  if (isSendEmail) {
+    return <Navigate to={PATH.CHECK_EMAIL} />;
+  }
 
   return (
     <div className={s.wrapper}>

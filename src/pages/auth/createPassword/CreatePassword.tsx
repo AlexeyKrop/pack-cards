@@ -3,8 +3,13 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'antd';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Navigate, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
+import { PATH } from '../../../routing/Pages';
+import { createNewPasswordTC } from '../../../store/reducers/createNewPasswordReducer';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './createNewPassword.module.css';
@@ -19,8 +24,11 @@ const schema = yup
   .required();
 
 export const CreatePassword: React.FC = () => {
-  // const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch();
+  const isCreateNewPassword = useAppSelector(
+    state => state.createNewPassword.isCreateNewPassword,
+  );
+  const { token } = useParams();
   const {
     control,
     formState: { errors },
@@ -30,8 +38,12 @@ export const CreatePassword: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data);
+    if (token) dispatch(createNewPasswordTC(data.password, token));
   };
+
+  if (isCreateNewPassword) {
+    return <Navigate to={PATH.LOGIN} />;
+  }
 
   return (
     <div className={s.wrapper}>
