@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { registrationAPI, RegistrationType } from '../../api/registration/registration';
 import { AppThunk } from '../store';
 
+import { setAppError } from './appReducer';
 import { setIsLoggedIn } from './authReducer';
 
 const initialState = {
@@ -31,7 +32,7 @@ export const setRegistrationTC =
         dispatch(setRegistration({ value: true }));
         dispatch(setIsLoggedIn({ value: true }));
       } else if (res.data.error) {
-        // dispatch(setAppErrorAC(res.data.error))
+        dispatch(setAppError({ error: res.data.error }));
       }
     });
   };

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
+import { CustomSpin } from '../components/customSpin/CustomSpin';
+import { useAppSelector } from '../hooks/useAppSelector/useAppSelector';
 import { CheckEmail } from '../pages/auth/checkEmail/CheckEmail';
 import { CreatePassword } from '../pages/auth/createPassword/CreatePassword';
 import { ForgotPassword } from '../pages/auth/forgotPassword/ForgotPassword';
@@ -32,11 +34,18 @@ const ROUTES = [
 ];
 
 export const Pages: React.FC = () => {
+  const status = useAppSelector(state => state.app.status);
+
+  console.log(status);
+
   return (
-    <Routes>
-      {ROUTES.map(({ path, element }) => (
-        <Route key={path} path={path} element={element} />
-      ))}
-    </Routes>
+    <>
+      {status === 'loading' && <CustomSpin />}
+      <Routes>
+        {ROUTES.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
+    </>
   );
 };

@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
 
 import { authAPI, LoginParamsType } from '../../api/auth/auth';
 import { AppThunk } from '../store';
 
+import { setAppError, setAppStatus } from './appReducer';
 import { setUserProfile } from './profileReducer';
 
 const initialState = {
@@ -28,10 +30,17 @@ export const { setIsLoggedIn } = authSlice.actions;
 export const loginTC =
   (loginParams: LoginParamsType): AppThunk =>
   dispatch => {
-    authAPI.login(loginParams).then(res => {
-      dispatch(setUserProfile({ user: res.data }));
-      dispatch(setIsLoggedIn({ value: true }));
-    });
+    dispatch(setAppStatus({ status: 'loading' }));
+    authAPI
+      .login(loginParams)
+      .then(res => {
+        dispatch(setUserProfile({ user: res.data }));
+        dispatch(setIsLoggedIn({ value: true }));
+        dispatch(setAppStatus({ status: 'success' }));
+      })
+      .catch((err: AxiosError<{ error: string }>) =>
+        dispatch(setAppError({ error: err.response?.data.error })),
+      );
   };
 export const logoutTC = (): AppThunk => dispatch => {
   authAPI.logout().then(() => dispatch(setIsLoggedIn({ value: false })));

@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { authAPI, UserType } from '../../api/auth/auth';
 import { AppThunk } from '../store';
 
+import { setAppStatus } from './appReducer';
+
 const initialState = {
   user: {
     name: '',
@@ -25,7 +27,8 @@ export const { setUserProfile } = profileSlice.actions;
 export const updateUserProfileTC =
   (name: string): AppThunk =>
   dispatch => {
-    authAPI
-      .update(name)
-      .then(res => dispatch(setUserProfile({ user: res.data.updatedUser })));
+    authAPI.update(name).then(res => {
+      dispatch(setAppStatus({ status: 'success' }));
+      dispatch(setUserProfile({ user: res.data.updatedUser }));
+    });
   };
