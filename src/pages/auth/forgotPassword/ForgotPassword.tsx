@@ -6,7 +6,9 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { PATH } from '../../../routing/Pages';
+import { forgotPasswordTC } from '../../../store/reducers/forgotPasswordReducer';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './forgotPassword.module.css';
@@ -19,9 +21,10 @@ const schema = yup
     email: yup.string().required(),
   })
   .required();
+const RESPONSE_MESSAGE_FOR_EMAIL = `<div>Перейдите по ссылке, чтобы восстановить пароль:<a href='/'>link</a></div>`;
 
 export const ForgotPassword: React.FC = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const {
     control,
     formState: { errors },
@@ -31,7 +34,7 @@ export const ForgotPassword: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log(data);
+    dispatch(forgotPasswordTC(data.email, RESPONSE_MESSAGE_FOR_EMAIL));
   };
 
   return (

@@ -8,12 +8,14 @@ import thunkMiddleware from 'redux-thunk';
 
 import { appReducer } from './reducers/appReducer';
 import { authReducer } from './reducers/authReducer';
+import { forgotPasswordReducer } from './reducers/forgotPasswordReducer';
 import { profileReducer } from './reducers/profileReducer';
 import { signUpReducer } from './reducers/signUpReducer';
 
 const rootReducer = combineReducers({
   registration: signUpReducer,
   auth: authReducer,
+  forgotPassword: forgotPasswordReducer,
   app: appReducer,
   profile: profileReducer,
 });

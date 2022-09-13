@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
+import { CheckEmail } from '../pages/auth/checkEmail/CheckEmail';
 import { ForgotPassword } from '../pages/auth/forgotPassword/ForgotPassword';
 import { Login } from '../pages/auth/login/Login';
 import { SignUp } from '../pages/auth/signUp/SignUp';
@@ -12,6 +13,7 @@ export const PATH = {
   LOGIN: '/login',
   SIGNUP: '/sign-up',
   RESET_PASSWORD: '/reset-password',
+  CHECK_EMAIL: '/check-email',
   SET_NEW_PASSWORD: '/set-new-password/:token',
   PACKS: '/packs',
   CARDS: '/cards',
@@ -24,6 +26,7 @@ const ROUTES = [
   { path: PATH.LOGIN, element: <Login /> },
   { path: PATH.SIGNUP, element: <SignUp /> },
   { path: PATH.RESET_PASSWORD, element: <ForgotPassword /> },
+  { path: PATH.CHECK_EMAIL, element: <CheckEmail /> },
 ];
 
 export const Pages: React.FC = () => {

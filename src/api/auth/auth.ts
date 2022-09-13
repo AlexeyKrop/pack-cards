@@ -24,6 +24,12 @@ export const authAPI = {
       },
     );
   },
+  forgotPassword(email: string, message: string, from?: string) {
+    return instance.post<ResetPassword, AxiosResponse<ForgotPasswordResponse>>(
+      `/auth/forgot`,
+      { email, message, from },
+    );
+  },
 };
 // TYPE
 export type LoginParamsType = {
@@ -55,4 +61,14 @@ export type UpdateUserType = {
 export type UpdateUserResponseType = {
   updatedUser: UserType;
   error?: string;
+};
+export type ForgotPasswordResponse = {
+  info: string;
+  error: string;
+};
+
+export type ResetPassword = {
+  email: string;
+  from?: string;
+  message?: string;
 };
