@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { PATH } from '../../../routing/Pages';
+import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './forgotPassword.module.css';
 
@@ -52,7 +53,7 @@ export const ForgotPassword: React.FC = () => {
           <p className={s.helperText}>
             Enter your email address and we will send you further instructions{' '}
           </p>
-          <input className={s.inputBtn} type="submit" value="Send Instructions" />
+          <CustomAuthButton name="Send Instructions" />
           <p className={s.text}>Did you remember your password?</p>
           <NavLink to={PATH.LOGIN} className={s.link}>
             Try logging in

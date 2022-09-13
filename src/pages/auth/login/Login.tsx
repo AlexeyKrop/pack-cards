@@ -11,6 +11,7 @@ import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { loginTC } from '../../../store/reducers/authReducer';
 import { selectLoggedIn } from '../../../store/selectors/selectLoggedIn';
+import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 import s from '../signUp/signUp.module.css';
 
 type IFormInput = {
@@ -80,7 +81,11 @@ export const Login: React.FC = () => {
             <input type="checkbox" {...register('checkbox')} />
             <span>Remember me</span>
           </div>
-          <input className={s.inputBtn} type="submit" value="Sign In" />
+          <div className={s.helperTextForgot}>
+            {' '}
+            <NavLink to={PATH.RESET_PASSWORD}>Forgot Password?</NavLink>
+          </div>
+          <CustomAuthButton name="Sign In" />
           <p className={s.text}>You don&apos;t have an account?</p>
           <NavLink to={PATH.SIGNUP} className={s.link}>
             Sing Up

@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { PATH } from '../../../routing/Pages';
 import { setRegistrationTC } from '../../../store/reducers/signUpReducer';
+import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './signUp.module.css';
 
@@ -90,7 +91,7 @@ export const SignUp: React.FC = () => {
             />
             <p className={s.error}>{errors.confirm_password?.message}</p>
           </div>
-          <input className={s.inputBtn} type="submit" value="Sign Up" />
+          <CustomAuthButton name="Sign Up" />
           <p className={s.text}> Already have an account?</p>
           <NavLink to={PATH.LOGIN} className={s.link}>
             Sing In
