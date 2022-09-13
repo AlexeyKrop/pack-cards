@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { Login } from '../pages/login/Login';
+import { ForgotPassword } from '../pages/auth/forgotPassword/ForgotPassword';
+import { Login } from '../pages/auth/login/Login';
+import { SignUp } from '../pages/auth/signUp/SignUp';
 import Profile from '../pages/profile/Profile';
-import { SignUp } from '../pages/signUp/SignUp';
 
 export const PATH = {
   PROFILE: '/profile',
@@ -22,6 +23,7 @@ const ROUTES = [
   { path: '/', element: <Profile /> },
   { path: PATH.LOGIN, element: <Login /> },
   { path: PATH.SIGNUP, element: <SignUp /> },
+  { path: PATH.RESET_PASSWORD, element: <ForgotPassword /> },
 ];
 
 export const Pages: React.FC = () => {

@@ -1,36 +1,35 @@
 import React from 'react';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { Input } from 'antd';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Navigate, NavLink } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
-import { setRegistrationTC } from '../../store/reducers/signUpReducer';
-
-import s from './signUp.module.css';
+import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
+import { PATH } from '../../../routing/Pages';
+import { loginTC } from '../../../store/reducers/authReducer';
+import { selectLoggedIn } from '../../../store/selectors/selectLoggedIn';
+import s from '../signUp/signUp.module.css';
 
 type IFormInput = {
   email: string;
   password: string;
-  confirm_password: string;
+  checkbox: boolean;
 };
 const schema = yup
   .object({
     email: yup.string().required(),
     password: yup.string().required(),
-    confirm_password: yup
-      .string()
-      .label('confirm password')
-      .required()
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
   })
   .required();
 
-export const SignUp: React.FC = () => {
+export const Login: React.FC = () => {
+  const isLoggedIn = useAppSelector(selectLoggedIn);
   const dispatch = useAppDispatch();
-
   const {
+    register,
     control,
     formState: { errors },
     handleSubmit,
@@ -39,14 +38,18 @@ export const SignUp: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    dispatch(setRegistrationTC(data));
+    dispatch(loginTC(data));
   };
+
+  if (isLoggedIn) {
+    return <Navigate to={PATH.PROFILE} />;
+  }
 
   return (
     <div className={s.wrapper}>
       <div className={s.content}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>Sing Up</h2>
+          <h2>Sign in</h2>
           <div className={s.input}>
             <Controller
               name="email"
@@ -73,24 +76,15 @@ export const SignUp: React.FC = () => {
             />
             <p className={s.error}>{errors.password?.message}</p>
           </div>
-          <div className={s.input}>
-            <Controller
-              name="confirm_password"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <Input.Password
-                  status={errors.confirm_password && 'error'}
-                  placeholder="confirm password"
-                  {...field}
-                />
-              )}
-            />
-            <p className={s.error}>{errors.confirm_password?.message}</p>
+          <div className={s.checkbox}>
+            <input type="checkbox" {...register('checkbox')} />
+            <span>Remember me</span>
           </div>
-          <input className={s.inputBtn} type="submit" value="Sign Up" />
-          <p className={s.text}> Already have an account?</p>
-          <div className={s.link}>Sing In</div>
+          <input className={s.inputBtn} type="submit" value="Sign In" />
+          <p className={s.text}>You don&apos;t have an account?</p>
+          <NavLink to={PATH.SIGNUP} className={s.link}>
+            Sing Up
+          </NavLink>
         </form>
       </div>
     </div>
