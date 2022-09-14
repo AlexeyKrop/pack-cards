@@ -23,7 +23,7 @@ const Header: React.FC = () => {
               <img src={logo} alt="logo" />
             </NavLink>
           </div>
-          {isLoggedIn && <Avatar name={user.name} width="36px" />}
+          {isLoggedIn && <Avatar mode="header" name={user.name} width="36px" />}
         </div>
       </div>
     </header>

@@ -43,5 +43,9 @@ export const loginTC =
       );
   };
 export const logoutTC = (): AppThunk => dispatch => {
-  authAPI.logout().then(() => dispatch(setIsLoggedIn({ value: false })));
+  dispatch(setAppStatus({ status: 'loading' }));
+  authAPI.logout().then(() => {
+    dispatch(setIsLoggedIn({ value: false }));
+    dispatch(setAppStatus({ status: 'success' }));
+  });
 };

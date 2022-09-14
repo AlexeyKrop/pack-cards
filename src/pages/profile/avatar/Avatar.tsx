@@ -19,10 +19,12 @@ export const Avatar: React.FC<AvatarType> = ({ mode, width, name }) => {
 
   return (
     <div className={s.block}>
-      <Button type="text" loading={isDisabled}>
-        {name}
-      </Button>
-      <img style={{ width, marginLeft: 5 }} src={avatar} alt="avatar" />
+      {mode === 'header' && (
+        <Button type="text" loading={isDisabled}>
+          {name}
+        </Button>
+      )}
+      <img style={{ width }} src={avatar} alt="avatar" />
       {mode === 'profile' && (
         <div className={s.circle}>
           <div className={s.btn}>

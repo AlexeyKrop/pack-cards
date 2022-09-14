@@ -35,6 +35,6 @@
     outline: none;
 }
 .block span{
-    border-bottom: 1px dashed #000000;
+    font-weight: bold;
 }
 
