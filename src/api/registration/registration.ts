@@ -9,17 +9,17 @@ export const registrationAPI = {
       registrationParams,
     );
   },
-  recoveryPassword(forgotPassword: ForgotPasswordType) {
-    return instance.post<ForgotPasswordType, AxiosResponse<ResetPasswordResponseType>>(
+  forgotPassword(email: string, message: string, from?: string) {
+    return instance.post<ResetPasswordParamsType, AxiosResponse<ForgotPasswordResponse>>(
       `/auth/forgot`,
-      forgotPassword,
+      { email, message, from },
     );
   },
-  generateNewPassword(newPasswordParams: NewPasswordParamsType) {
-    return instance.post<NewPasswordParamsType, AxiosResponse<ResetPasswordResponseType>>(
-      '/auth/set-new-password',
-      newPasswordParams,
-    );
+  createNewPassword(password: string, resetPasswordToken: string) {
+    return instance.post<
+      createNewPasswordParamsType,
+      AxiosResponse<createNewPasswordResponseType>
+    >(`/auth/set-new-password`, { password, resetPasswordToken });
   },
 };
 
@@ -32,17 +32,21 @@ export type ResponseRegistrationType = {
   addedUser: {};
   error?: string;
 };
-export type ForgotPasswordType = {
-  email: string;
-  from: string;
-  message: string;
+export type ForgotPasswordResponse = {
+  info: string;
+  error: string;
 };
-export type NewPasswordParamsType = {
+
+export type ResetPasswordParamsType = {
+  email: string;
+  from?: string;
+  message?: string;
+};
+export type createNewPasswordParamsType = {
   password: string;
   resetPasswordToken: string;
 };
-export type ResetPasswordResponseType = {
+export type createNewPasswordResponseType = {
   info: string;
-
   error: string;
 };

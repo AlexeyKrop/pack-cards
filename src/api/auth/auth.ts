@@ -24,18 +24,6 @@ export const authAPI = {
       },
     );
   },
-  forgotPassword(email: string, message: string, from?: string) {
-    return instance.post<ResetPasswordParamsType, AxiosResponse<ForgotPasswordResponse>>(
-      `/auth/forgot`,
-      { email, message, from },
-    );
-  },
-  createNewPassword(password: string, resetPasswordToken: string) {
-    return instance.post<
-      createNewPasswordParamsType,
-      AxiosResponse<createNewPasswordResponseType>
-    >(`/auth/set-new-password`, { password, resetPasswordToken });
-  },
 };
 // TYPE
 export type LoginParamsType = {
@@ -67,22 +55,4 @@ export type UpdateUserParamsType = {
 export type UpdateUserResponseType = {
   updatedUser: UserType;
   error?: string;
-};
-export type ForgotPasswordResponse = {
-  info: string;
-  error: string;
-};
-
-export type ResetPasswordParamsType = {
-  email: string;
-  from?: string;
-  message?: string;
-};
-export type createNewPasswordParamsType = {
-  password: string;
-  resetPasswordToken: string;
-};
-export type createNewPasswordResponseType = {
-  info: string;
-  error: string;
 };

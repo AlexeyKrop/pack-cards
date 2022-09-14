@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { authAPI } from '../../api/auth/auth';
+import { registrationAPI } from '../../api/registration/registration';
 import { AppThunk } from '../store';
 
 const initialState = {
@@ -25,7 +25,7 @@ export const { setIsSendEmail } = forgotPasswordSlice.actions;
 export const forgotPasswordTC =
   (email: string, message: string): AppThunk =>
   dispatch => {
-    authAPI
+    registrationAPI
       .forgotPassword(email, message)
       .then(() => dispatch(setIsSendEmail({ value: true })));
   };

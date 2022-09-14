@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { authAPI } from '../../api/auth/auth';
+import { registrationAPI } from '../../api/registration/registration';
 import { AppThunk } from '../store';
 
 const initialState = {
@@ -24,7 +24,7 @@ export const { setIsNewPassword } = createNewPasswordSlice.actions;
 export const createNewPasswordTC =
   (password: string, resetPasswordToken: string): AppThunk =>
   dispatch => {
-    authAPI.createNewPassword(password, resetPasswordToken).then(res => {
+    registrationAPI.createNewPassword(password, resetPasswordToken).then(res => {
       console.log(res);
       dispatch(setIsNewPassword({ value: true }));
     });
