@@ -3,12 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { authAPI, UserType } from '../../api/auth/auth';
 import { AppThunk } from '../store';
 
-import { setAppStatus } from './appReducer';
-
 const initialState = {
   user: {
     name: '',
   } as UserType,
+  isDisabled: false,
 };
 
 const profileSlice = createSlice({
@@ -18,17 +17,21 @@ const profileSlice = createSlice({
     setUserProfile: (state, action: PayloadAction<{ user: UserType }>) => {
       state.user = action.payload.user;
     },
+    setDisabled: (state, action: PayloadAction<{ isDisabled: boolean }>) => {
+      state.isDisabled = action.payload.isDisabled;
+    },
   },
 });
 
 export const profileReducer = profileSlice.reducer;
-export const { setUserProfile } = profileSlice.actions;
+export const { setUserProfile, setDisabled } = profileSlice.actions;
 
 export const updateUserProfileTC =
   (name: string): AppThunk =>
   dispatch => {
-    authAPI.update(name).then(res => {
-      dispatch(setAppStatus({ status: 'success' }));
+    dispatch(setDisabled({ isDisabled: true }));
+    authAPI.updateName(name).then(res => {
+      dispatch(setDisabled({ isDisabled: false }));
       dispatch(setUserProfile({ user: res.data.updatedUser }));
     });
   };

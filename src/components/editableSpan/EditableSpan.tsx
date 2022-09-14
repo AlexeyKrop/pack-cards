@@ -4,6 +4,8 @@ import { ChangeEvent, useState } from 'react';
 import { EditFilled } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 
+import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
+
 import s from './editableSpan.module.css';
 
 type EditableSpanType = {
@@ -12,6 +14,7 @@ type EditableSpanType = {
 };
 
 export const EditableSpan: React.FC<EditableSpanType> = ({ callBack, title }) => {
+  const isDisabled = useAppSelector(state => state.profile.isDisabled);
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState<string>(title);
 
@@ -32,8 +35,9 @@ export const EditableSpan: React.FC<EditableSpanType> = ({ callBack, title }) =>
     <div className={s.wrapper}>
       {!editMode ? (
         <div onDoubleClick={onClickDoubleHandler}>
-          <span>{title}</span>
-          <EditFilled style={{ width: '20px', height: '20px' }} />
+          <Button type="text" loading={isDisabled}>
+            {title} <EditFilled style={{ width: '20px', height: '20px' }} />
+          </Button>
         </div>
       ) : (
         <div className={s.group}>

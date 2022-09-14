@@ -15,7 +15,7 @@ export const authAPI = {
   me() {
     return instance.post<{}, AxiosResponse<UserType>>(`/auth/me`);
   },
-  update(name: string, avatar?: string) {
+  updateName(name: string, avatar?: string) {
     return instance.put<UpdateUserParamsType, AxiosResponse<UpdateUserResponseType>>(
       `/auth/me`,
       {
