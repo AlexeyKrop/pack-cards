@@ -22,7 +22,9 @@ const App: React.FC = () => {
       <HashRouter>
         <Header />
         <div className="container">
-          <Pages />
+          <div className="main">
+            <Pages />
+          </div>
         </div>
       </HashRouter>
     </>

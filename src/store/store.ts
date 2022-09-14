@@ -10,6 +10,7 @@ import { appReducer } from './reducers/appReducer';
 import { authReducer } from './reducers/authReducer';
 import { createNewPasswordReducer } from './reducers/createNewPasswordReducer';
 import { forgotPasswordReducer } from './reducers/forgotPasswordReducer';
+import { packsReducer } from './reducers/packsReducer';
 import { profileReducer } from './reducers/profileReducer';
 import { signUpReducer } from './reducers/signUpReducer';
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   createNewPassword: createNewPasswordReducer,
   app: appReducer,
   profile: profileReducer,
+  packs: packsReducer,
 });
 
 export const store = configureStore({

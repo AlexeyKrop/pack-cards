@@ -9,6 +9,7 @@ import { CreatePassword } from '../pages/auth/createPassword/CreatePassword';
 import { ForgotPassword } from '../pages/auth/forgotPassword/ForgotPassword';
 import { Login } from '../pages/auth/login/Login';
 import { SignUp } from '../pages/auth/signUp/SignUp';
+import { Packs } from '../pages/packs/Packs';
 import Profile from '../pages/profile/Profile';
 
 export const PATH = {
@@ -31,6 +32,7 @@ const ROUTES = [
   { path: PATH.RESET_PASSWORD, element: <ForgotPassword /> },
   { path: PATH.CHECK_EMAIL, element: <CheckEmail /> },
   { path: PATH.CREATE_PASSWORD, element: <CreatePassword /> },
+  { path: PATH.PACKS, element: <Packs /> },
 ];
 
 export const Pages: React.FC = () => {
