@@ -36,8 +36,6 @@ const ROUTES = [
 export const Pages: React.FC = () => {
   const status = useAppSelector(state => state.app.status);
 
-  console.log(status);
-
   return (
     <>
       {status === 'loading' && <CustomSpin />}

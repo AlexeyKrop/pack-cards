@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { LoginOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, LoginOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { Navigate } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 
 import { EditableSpan } from '../../components/editableSpan/EditableSpan';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
@@ -33,14 +33,21 @@ const Profile: React.FC = () => {
 
   return (
     <div className={s.wrapper}>
-      <div className={s.content}>
-        <h2 className={s.title}>Personal Information</h2>
-        <Avatar mode="profile" width="96px" />
-        <EditableSpan callBack={updateUserNameValue} title={user.name} />
-        <p>{user.email}</p>
-        <Button type="default" icon={<LoginOutlined />} onClick={handleLogout}>
-          Log out
-        </Button>
+      <NavLink className={s.link} to={PATH.PACKS}>
+        {' '}
+        <ArrowLeftOutlined />
+        <span className={s.navigateText}>Back to Packs List</span>
+      </NavLink>
+      <div className={s.wrapperCard}>
+        <div className={s.content}>
+          <h2 className={s.title}>Personal Information</h2>
+          <Avatar mode="profile" width="96px" />
+          <EditableSpan callBack={updateUserNameValue} title={user.name} />
+          <p>{user.email}</p>
+          <Button type="default" icon={<LoginOutlined />} onClick={handleLogout}>
+            Log out
+          </Button>
+        </div>
       </div>
     </div>
   );

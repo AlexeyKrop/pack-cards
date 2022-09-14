@@ -43,6 +43,7 @@ export const EditableSpan: React.FC<EditableSpanType> = ({ callBack, title }) =>
             className={s.input}
             value={inputValue}
             onChange={changeUserNameValue}
+            onBlur={handleClick}
           />
           <Button size="small" className={s.btn} onClick={handleClick}>
             save

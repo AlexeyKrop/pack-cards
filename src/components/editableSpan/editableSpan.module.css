@@ -1,11 +1,12 @@
 .wrapper{
+    cursor: pointer;
     position: relative;
     width: 100%;
     max-width: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .btn{
     position: absolute;

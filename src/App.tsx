@@ -21,7 +21,9 @@ const App: React.FC = () => {
       <SnackBar />
       <HashRouter>
         <Header />
-        <Pages />
+        <div className="container">
+          <Pages />
+        </div>
       </HashRouter>
     </>
   );
