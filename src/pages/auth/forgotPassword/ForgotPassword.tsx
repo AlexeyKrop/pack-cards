@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { forgotPasswordTC } from '../../../store/reducers/forgotPasswordReducer';
+import { selectIsSendEmail } from '../../../store/selectors/selectIsSendEmail';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './forgotPassword.module.css';
@@ -25,7 +26,7 @@ const schema = yup
 const RESPONSE_MESSAGE_FOR_EMAIL = `<div>Перейдите по ссылке, чтобы восстановить пароль:<a href='http://localhost:3000/#/create-password/$token$'>link</a></div>`;
 
 export const ForgotPassword: React.FC = () => {
-  const isSendEmail = useAppSelector(state => state.forgotPassword.isSendEmail);
+  const isSendEmail = useAppSelector(selectIsSendEmail);
   const dispatch = useAppDispatch();
 
   const {

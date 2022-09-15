@@ -26,7 +26,10 @@ const packsSlice = createSlice({
 export const packsReducer = packsSlice.reducer;
 export const { setCardsPack } = packsSlice.actions;
 
-export const setCardsPackTC = (): AppThunk => dispatch => {
+export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
+  const { cardPacksTotalCount } = getState().packs;
+
+  console.log(cardPacksTotalCount);
   packsAPI
     .setCardsPack()
     .then(res => dispatch(setCardsPack({ cardPacks: res.data.cardPacks })));

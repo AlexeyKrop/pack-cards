@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { createNewPasswordTC } from '../../../store/reducers/createNewPasswordReducer';
+import { selectIsCreateNewPassword } from '../../../store/selectors/selectIsCreateNewPassword';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './createNewPassword.module.css';
@@ -25,9 +26,7 @@ const schema = yup
 
 export const CreatePassword: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isCreateNewPassword = useAppSelector(
-    state => state.createNewPassword.isCreateNewPassword,
-  );
+  const isCreateNewPassword = useAppSelector(selectIsCreateNewPassword);
   const { token } = useParams();
   const {
     control,

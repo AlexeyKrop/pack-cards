@@ -1,9 +1,14 @@
 import React from 'react';
 
-import { Table, TablePaginationConfig } from 'antd';
+import { Table } from 'antd';
 
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
+import {
+  selectCardsPacksTotalCount,
+  selectCurrentPageCount,
+  selectPageCount,
+} from '../../../store/selectors/selectParamsPacks';
 
 const columns = [
   {
@@ -46,27 +51,39 @@ const columns = [
 
 export const PacksTable: React.FC = () => {
   const cardPacks = useAppSelector(selectCardsPack);
-  // eslint-disable-next-line camelcase
+  const cardPacksTotalCount = useAppSelector(selectCardsPacksTotalCount);
+  const pageCount = useAppSelector(selectPageCount);
+  const currentPage = useAppSelector(selectCurrentPageCount);
+
+  const onChangeHandle: (page: any, pageSize: any) => void = (page, pageSize) => {
+    console.log(page, pageSize);
+  };
+
+  const pagination = {
+    current: currentPage,
+    defaultPageSize: pageCount,
+    pageSizeOptions: [4, 8, 16, 32, 64],
+    pageCount,
+    total: cardPacksTotalCount,
+  };
+
   const dataCard = cardPacks.map(({ _id, name, cardsCount, updated, user_name }) => {
     return {
-      // eslint-disable-next-line no-underscore-dangle
       key: _id,
       name,
       cards: cardsCount,
       updated,
-      // eslint-disable-next-line camelcase
       created: user_name,
       actions: name,
     };
   });
-  const onChange: (
-    pagination: TablePaginationConfig,
-    filters: any,
-    sorter: any,
-    extra: any,
-  ) => void = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
-  };
 
-  return <Table columns={columns} dataSource={dataCard} onChange={onChange} />;
+  return (
+    <Table
+      columns={columns}
+      onChange={onChangeHandle}
+      dataSource={dataCard}
+      pagination={pagination}
+    />
+  );
 };

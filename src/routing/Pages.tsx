@@ -11,6 +11,7 @@ import { Login } from '../pages/auth/login/Login';
 import { SignUp } from '../pages/auth/signUp/SignUp';
 import { Packs } from '../pages/packs/Packs';
 import Profile from '../pages/profile/Profile';
+import { selectAppStatus } from '../store/selectors/selectAppStatus';
 
 export const PATH = {
   PROFILE: '/profile',
@@ -36,7 +37,7 @@ const ROUTES = [
 ];
 
 export const Pages: React.FC = () => {
-  const status = useAppSelector(state => state.app.status);
+  const status = useAppSelector(selectAppStatus);
 
   return (
     <>
