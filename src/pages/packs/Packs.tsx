@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
 import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
+import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
@@ -40,6 +41,7 @@ export const Packs: React.FC = () => {
       </div>
       <div className={s.filterBlock}>
         <InputDebounce />
+        <ToggleButton />
       </div>
       <PacksTable />;
     </div>
