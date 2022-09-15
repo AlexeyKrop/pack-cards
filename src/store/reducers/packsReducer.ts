@@ -5,11 +5,7 @@ import { AppThunk } from '../store';
 
 const initialState = {
   cardPacks: [] as PackType[],
-  page: 1,
-  pageCount: 4,
   cardPacksTotalCount: 3729,
-  minCardsCount: 0,
-  maxCardsCount: 110,
   token: '2575f4e0-340d-11ed-ad48-2f28b3036009',
   tokenDeathTime: 1663751458606,
 };
@@ -20,6 +16,12 @@ const packsSlice = createSlice({
     setCardsPack: (state, action: PayloadAction<{ cardPacks: PackType[] }>) => {
       state.cardPacks = action.payload.cardPacks;
     },
+    // setChangePage: (state, action: PayloadAction<{ page: number }>) => {
+    //   state.page = action.payload.page;
+    // },
+    // setChangePageCount: (state, action: PayloadAction<{ pageCount: number }>) => {
+    //   state.pageCount = action.payload.pageCount;
+    // },
   },
 });
 
@@ -27,10 +29,11 @@ export const packsReducer = packsSlice.reducer;
 export const { setCardsPack } = packsSlice.actions;
 
 export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
-  const { cardPacksTotalCount } = getState().packs;
+  const { page } = getState().packsParams;
 
-  console.log(cardPacksTotalCount);
-  packsAPI
-    .setCardsPack()
-    .then(res => dispatch(setCardsPack({ cardPacks: res.data.cardPacks })));
+  packsAPI.setCardsPack(page, 4).then(res => {
+    dispatch(setCardsPack({ cardPacks: res.data.cardPacks }));
+    // dispatch(setChangePage({ page: res.data.page }));
+    // dispatch(setChangePageCount({ pageCount: res.data.pageCount }));
+  });
 };

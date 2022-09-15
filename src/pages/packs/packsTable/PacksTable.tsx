@@ -2,7 +2,9 @@ import React from 'react';
 
 import { Table, TablePaginationConfig } from 'antd';
 
+import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
+import { setChangePage } from '../../../store/reducers/packsParamsReducer';
 import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
 import {
   selectCardsPacksTotalCount,
@@ -54,9 +56,12 @@ export const PacksTable: React.FC = () => {
   const cardPacksTotalCount = useAppSelector(selectCardsPacksTotalCount);
   const pageCount = useAppSelector(selectPageCount);
   const currentPage = useAppSelector(selectCurrentPageCount);
-
+  const dispatch = useAppDispatch();
   const onChangeHandle: (pagination: TablePaginationConfig) => void = pagination => {
-    console.log(pagination);
+    const { current, pageSize } = pagination;
+
+    console.log(current, pageSize);
+    dispatch(setChangePage({ current, pageSize }));
   };
 
   const pagination = {

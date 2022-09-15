@@ -7,16 +7,18 @@ import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
 import { setCardsPackTC } from '../../store/reducers/packsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
+import { selectCurrentPageCount } from '../../store/selectors/selectParamsPacks';
 
 import { PacksTable } from './packsTable/PacksTable';
 
 export const Packs: React.FC = () => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectLoggedIn);
+  const page = useAppSelector(selectCurrentPageCount);
 
   useEffect(() => {
     dispatch(setCardsPackTC());
-  }, [dispatch]);
+  }, [dispatch, page]);
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }

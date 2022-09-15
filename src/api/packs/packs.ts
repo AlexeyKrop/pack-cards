@@ -1,8 +1,10 @@
 import { instance } from '../config';
 
 export const packsAPI = {
-  setCardsPack() {
-    return instance.get<CardsPackResponseType>(`/cards/pack`);
+  setCardsPack(currentPage: number, pageSize: number) {
+    return instance.get<CardsPackResponseType>(
+      `/cards/pack?page=${currentPage}&pageCount=${pageSize}`,
+    );
   },
 };
 export type PackType = {
