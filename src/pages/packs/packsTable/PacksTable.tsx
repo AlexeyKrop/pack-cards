@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table } from 'antd';
+import { Table, TablePaginationConfig } from 'antd';
 
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
@@ -55,8 +55,8 @@ export const PacksTable: React.FC = () => {
   const pageCount = useAppSelector(selectPageCount);
   const currentPage = useAppSelector(selectCurrentPageCount);
 
-  const onChangeHandle: (page: any, pageSize: any) => void = (page, pageSize) => {
-    console.log(page, pageSize);
+  const onChangeHandle: (pagination: TablePaginationConfig) => void = pagination => {
+    console.log(pagination);
   };
 
   const pagination = {
