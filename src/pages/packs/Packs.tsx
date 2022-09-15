@@ -15,6 +15,7 @@ import {
   selectPageSizeCount,
   selectSetFilterForPackName,
 } from '../../store/selectors/selectParamsPacks';
+import { selectUserID } from '../../store/selectors/selectUserID';
 
 import s from './packs.module.css';
 import { PacksTable } from './packsTable/PacksTable';
@@ -25,10 +26,11 @@ export const Packs: React.FC = () => {
   const page = useAppSelector(selectCurrentPageCount);
   const pageSizeCount = useAppSelector(selectPageSizeCount);
   const packName = useAppSelector(selectSetFilterForPackName);
+  const userID = useAppSelector(selectUserID);
 
   useEffect(() => {
     dispatch(setCardsPackTC());
-  }, [dispatch, page, pageSizeCount, packName]);
+  }, [dispatch, page, pageSizeCount, packName, userID]);
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }

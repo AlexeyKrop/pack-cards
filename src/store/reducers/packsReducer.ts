@@ -27,9 +27,10 @@ export const packsReducer = packsSlice.reducer;
 export const { setCardsPack, setCardPacksTotalCount } = packsSlice.actions;
 
 export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
-  const { page, pageCount, packName } = getState().packsParams;
-  const params = { page, pageCount, packName };
+  const { page, pageCount, packName, user_id } = getState().packsParams;
+  const params = { page, pageCount, packName, user_id };
 
+  console.log(user_id);
   packsAPI.setCardsPack(params).then(res => {
     dispatch(setCardsPack({ cardPacks: res.data.cardPacks }));
     dispatch(

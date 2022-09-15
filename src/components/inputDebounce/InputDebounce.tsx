@@ -4,7 +4,7 @@ import { Input } from 'antd';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useDebounce } from '../../hooks/useDebounce/useDebounce';
-import { searchPackNameAC } from '../../store/reducers/packsParamsReducer';
+import { searchPackName } from '../../store/reducers/packsParamsReducer';
 
 export const InputDebounce: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -12,7 +12,7 @@ export const InputDebounce: React.FC = () => {
   const debouncedSearchTerm = useDebounce(inputValue);
 
   useEffect(() => {
-    dispatch(searchPackNameAC({ packName: debouncedSearchTerm }));
+    dispatch(searchPackName({ packName: debouncedSearchTerm }));
   }, [dispatch, debouncedSearchTerm]);
   const onChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void = e => {
     const { value } = e.currentTarget;
