@@ -26,8 +26,12 @@ const packsParamsSlice = createSlice({
     ) => {
       state.pageCount = action.payload.pageCount;
     },
+    searchPackNameAC: (state, action: PayloadAction<{ packName: string }>) => {
+      state.packName = action.payload.packName;
+    },
   },
 });
 
 export const packsParamsReducer = packsParamsSlice.reducer;
-export const { setChangePage, setChangePageSize } = packsParamsSlice.actions;
+export const { setChangePage, setChangePageSize, searchPackNameAC } =
+  packsParamsSlice.actions;

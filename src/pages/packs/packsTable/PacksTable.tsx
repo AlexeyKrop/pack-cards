@@ -61,10 +61,11 @@ export const PacksTable: React.FC = () => {
   const currentPage = useAppSelector(selectCurrentPageCount);
   const dispatch = useAppDispatch();
   const onChangeHandle: (pagination: TablePaginationConfig) => void = pagination => {
-    const { current, pageSize } = pagination;
+    const { current, pageSize, total } = pagination;
 
-    dispatch(setChangePage({ currentPage: current }));
+    console.log(`total: ${total}`);
     dispatch(setChangePageSize({ pageCount: pageSize }));
+    dispatch(setChangePage({ currentPage: current }));
   };
 
   const pagination = {
@@ -72,7 +73,7 @@ export const PacksTable: React.FC = () => {
     defaultPageSize: pageCount,
     pageSizeOptions: [4, 8, 16, 32, 64],
     pageCount,
-    total: cardPacksTotalCount - pageCount!,
+    total: cardPacksTotalCount,
   };
 
   const dataCard = cardPacks.map(({ _id, name, cardsCount, updated, user_name }) => {
@@ -86,16 +87,15 @@ export const PacksTable: React.FC = () => {
     };
   });
 
+  console.log(`pageCount: ${pageCount}`);
+  console.log(`dataCard: ${dataCard.length}`);
+
   return (
-    <div>
-      {dataCard.length > pageCount! && (
-        <Table
-          columns={columns}
-          onChange={onChangeHandle}
-          dataSource={dataCard}
-          pagination={pagination}
-        />
-      )}
-    </div>
+    <Table
+      columns={columns}
+      onChange={onChangeHandle}
+      dataSource={dataCard}
+      pagination={pagination}
+    />
   );
 };
