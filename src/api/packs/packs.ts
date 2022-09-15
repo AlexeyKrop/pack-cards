@@ -1,10 +1,10 @@
 import { instance } from '../config';
 
 export const packsAPI = {
-  setCardsPack(currentPage: number, pageSize: number) {
-    return instance.get<CardsPackResponseType>(
-      `/cards/pack?page=${currentPage}&pageCount=${pageSize}`,
-    );
+  setCardsPack(packsParams: PacksParamsType) {
+    return instance.get<CardsPackResponseType>(`/cards/pack?`, {
+      params: packsParams,
+    });
   },
 };
 export type PackType = {
@@ -36,4 +36,14 @@ export type CardsPackResponseType = {
   maxCardsCount: number;
   token: string;
   tokenDeathTime: number;
+};
+
+export type PacksParamsType = {
+  packName?: string;
+  min?: number;
+  max?: number;
+  sortPacks?: string;
+  page?: number | undefined;
+  pageCount?: number | undefined;
+  user_id?: string;
 };

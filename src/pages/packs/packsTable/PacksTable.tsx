@@ -4,12 +4,15 @@ import { Table, TablePaginationConfig } from 'antd';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
-import { setChangePage } from '../../../store/reducers/packsParamsReducer';
+import {
+  setChangePage,
+  setChangePageSize,
+} from '../../../store/reducers/packsParamsReducer';
 import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
 import {
   selectCardsPacksTotalCount,
   selectCurrentPageCount,
-  selectPageCount,
+  selectPageSizeCount,
 } from '../../../store/selectors/selectParamsPacks';
 
 const columns = [
@@ -54,14 +57,14 @@ const columns = [
 export const PacksTable: React.FC = () => {
   const cardPacks = useAppSelector(selectCardsPack);
   const cardPacksTotalCount = useAppSelector(selectCardsPacksTotalCount);
-  const pageCount = useAppSelector(selectPageCount);
+  const pageCount = useAppSelector(selectPageSizeCount);
   const currentPage = useAppSelector(selectCurrentPageCount);
   const dispatch = useAppDispatch();
   const onChangeHandle: (pagination: TablePaginationConfig) => void = pagination => {
     const { current, pageSize } = pagination;
 
-    console.log(current, pageSize);
-    dispatch(setChangePage({ current, pageSize }));
+    dispatch(setChangePage({ currentPage: current }));
+    dispatch(setChangePageSize({ pageCount: pageSize }));
   };
 
   const pagination = {
@@ -69,7 +72,7 @@ export const PacksTable: React.FC = () => {
     defaultPageSize: pageCount,
     pageSizeOptions: [4, 8, 16, 32, 64],
     pageCount,
-    total: cardPacksTotalCount,
+    total: cardPacksTotalCount - pageCount!,
   };
 
   const dataCard = cardPacks.map(({ _id, name, cardsCount, updated, user_name }) => {
@@ -84,11 +87,15 @@ export const PacksTable: React.FC = () => {
   });
 
   return (
-    <Table
-      columns={columns}
-      onChange={onChangeHandle}
-      dataSource={dataCard}
-      pagination={pagination}
-    />
+    <div>
+      {dataCard.length > pageCount! && (
+        <Table
+          columns={columns}
+          onChange={onChangeHandle}
+          dataSource={dataCard}
+          pagination={pagination}
+        />
+      )}
+    </div>
   );
 };

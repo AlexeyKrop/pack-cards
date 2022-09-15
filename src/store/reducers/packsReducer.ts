@@ -16,12 +16,6 @@ const packsSlice = createSlice({
     setCardsPack: (state, action: PayloadAction<{ cardPacks: PackType[] }>) => {
       state.cardPacks = action.payload.cardPacks;
     },
-    // setChangePage: (state, action: PayloadAction<{ page: number }>) => {
-    //   state.page = action.payload.page;
-    // },
-    // setChangePageCount: (state, action: PayloadAction<{ pageCount: number }>) => {
-    //   state.pageCount = action.payload.pageCount;
-    // },
   },
 });
 
@@ -29,9 +23,10 @@ export const packsReducer = packsSlice.reducer;
 export const { setCardsPack } = packsSlice.actions;
 
 export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
-  const { page } = getState().packsParams;
+  const { page, pageCount } = getState().packsParams;
+  const params = { page, pageCount };
 
-  packsAPI.setCardsPack(page, 4).then(res => {
+  packsAPI.setCardsPack(params).then(res => {
     dispatch(setCardsPack({ cardPacks: res.data.cardPacks }));
     // dispatch(setChangePage({ page: res.data.page }));
     // dispatch(setChangePageCount({ pageCount: res.data.pageCount }));

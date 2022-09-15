@@ -5,8 +5,8 @@ const initialState = {
   min: 0,
   max: 9,
   sortPacks: '',
-  page: 1,
-  pageCount: 4,
+  page: 1 as number | undefined,
+  pageCount: 4 as number | undefined,
   user_id: '',
 };
 
@@ -14,12 +14,20 @@ const packsParamsSlice = createSlice({
   name: 'packsParams',
   initialState,
   reducers: {
-    setChangePage: (state, action: PayloadAction<{ current: any; pageSize: any }>) => {
-      state.page = action.payload.current;
-      state.pageCount = action.payload.pageSize;
+    setChangePage: (
+      state,
+      action: PayloadAction<{ currentPage: number | undefined }>,
+    ) => {
+      state.page = action.payload.currentPage;
+    },
+    setChangePageSize: (
+      state,
+      action: PayloadAction<{ pageCount: number | undefined }>,
+    ) => {
+      state.pageCount = action.payload.pageCount;
     },
   },
 });
 
 export const packsParamsReducer = packsParamsSlice.reducer;
-export const { setChangePage } = packsParamsSlice.actions;
+export const { setChangePage, setChangePageSize } = packsParamsSlice.actions;
