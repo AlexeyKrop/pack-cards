@@ -14,10 +14,9 @@ export const Packs: React.FC = () => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectLoggedIn);
 
-  console.log('Pack render');
   useEffect(() => {
     dispatch(setCardsPackTC());
-  }, []);
+  }, [dispatch]);
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }
