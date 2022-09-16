@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
+import { DoubleRangeSlider } from '../../components/doubleRangeSlider/DoubleRangeSlider';
 import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
 import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
@@ -44,6 +45,7 @@ export const Packs: React.FC = () => {
       <div className={s.filterBlock}>
         <InputDebounce />
         <ToggleButton />
+        <DoubleRangeSlider />
       </div>
       <PacksTable />;
     </div>

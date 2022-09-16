@@ -32,9 +32,21 @@ const packsParamsSlice = createSlice({
     setMyCardsPack: (state, action: PayloadAction<{ id: string }>) => {
       state.user_id = action.payload.id;
     },
+    setFilterForMinCountCards: (state, action: PayloadAction<{ min: number }>) => {
+      state.min = action.payload.min;
+    },
+    setFilterForMaxCountCards: (state, action: PayloadAction<{ max: number }>) => {
+      state.max = action.payload.max;
+    },
   },
 });
 
 export const packsParamsReducer = packsParamsSlice.reducer;
-export const { setChangePage, setChangePageSize, searchPackName, setMyCardsPack } =
-  packsParamsSlice.actions;
+export const {
+  setChangePage,
+  setChangePageSize,
+  searchPackName,
+  setMyCardsPack,
+  setFilterForMinCountCards,
+  setFilterForMaxCountCards,
+} = packsParamsSlice.actions;

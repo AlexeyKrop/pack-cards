@@ -8,3 +8,7 @@ export const selectCurrentPageCount = (state: RootState): number | undefined =>
   state.packsParams.page;
 export const selectSetFilterForPackName = (state: RootState): string =>
   state.packsParams.packName;
+export const selectSetFilterForMinCountCards = (state: RootState): number =>
+  state.packsParams.min;
+export const selectSetFilterForMaxCountCards = (state: RootState): number =>
+  state.packsParams.max;
