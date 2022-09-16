@@ -1,10 +1,15 @@
+import { AxiosResponse } from 'axios';
+
 import { instance } from '../config';
 
 export const packsAPI = {
   setCardsPack(packsParams: PacksParamsType) {
-    return instance.get<CardsPackResponseType>(`/cards/pack?`, {
-      params: packsParams,
-    });
+    return instance.get<PacksParamsType, AxiosResponse<CardsPackResponseType>>(
+      `/cards/pack?`,
+      {
+        params: packsParams,
+      },
+    );
   },
 };
 export type PackType = {

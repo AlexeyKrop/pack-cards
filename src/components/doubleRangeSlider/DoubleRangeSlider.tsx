@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { InputNumber, Slider } from 'antd';
 
+import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
+import {
+  setFilterForMaxCountCards,
+  setFilterForMinCountCards,
+} from '../../store/reducers/packsParamsReducer';
 import {
   selectSetFilterForMaxCountCards,
   selectSetFilterForMinCountCards,
 } from '../../store/selectors/selectParamsPacks';
 
+const MIN_DEFAULT_RANGE_VALUE = 0;
+const MAX_DEFAULT_RANGE_VALUE = 100;
+
 export const DoubleRangeSlider: React.FC = () => {
   const min = useAppSelector(selectSetFilterForMinCountCards);
   const max = useAppSelector(selectSetFilterForMaxCountCards);
+  const dispatch = useAppDispatch();
   const [sliderValue, setSliderValue] = useState<[number, number]>([min, max]);
 
+  useEffect(() => {
+    setSliderValue([min, max]);
+  }, [min, max]);
   const onChangeSliderTrack: (value: [number, number]) => void = value => {
     setSliderValue(value);
   };
-  const onAfterChange: () => void = () => {
-    // console.log(sliderValue);
+  const onAfterChange: (value: [number, number]) => void = value => {
+    dispatch(setFilterForMinCountCards({ min: value[0] }));
+    dispatch(setFilterForMaxCountCards({ max: value[1] }));
   };
   const onChangeMinValue: (value: number) => void = value => {
     setSliderValue([value, sliderValue[1]]);
@@ -29,8 +42,8 @@ export const DoubleRangeSlider: React.FC = () => {
   return (
     <>
       <InputNumber
-        min={0}
-        max={sliderValue[1]}
+        min={1}
+        max={100}
         style={{ margin: '0 16px' }}
         value={typeof sliderValue[0] === 'number' ? sliderValue[0] : 0}
         onChange={onChangeMinValue}
@@ -39,13 +52,11 @@ export const DoubleRangeSlider: React.FC = () => {
         value={sliderValue}
         onAfterChange={onAfterChange}
         onChange={onChangeSliderTrack}
-        range={{
-          draggableTrack: true,
-        }}
-        defaultValue={[min, max]}
+        range
+        defaultValue={[MIN_DEFAULT_RANGE_VALUE, MAX_DEFAULT_RANGE_VALUE]}
       />
       <InputNumber
-        min={sliderValue[0]}
+        min={1}
         max={100}
         style={{ margin: '0 16px' }}
         value={typeof sliderValue[1] === 'number' ? sliderValue[1] : 0}

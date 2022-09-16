@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { FilterOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
@@ -9,11 +10,14 @@ import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
+import { setResetFilter } from '../../store/reducers/packsParamsReducer';
 import { setCardsPackTC } from '../../store/reducers/packsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
 import {
   selectCurrentPageCount,
   selectPageSizeCount,
+  selectSetFilterForMaxCountCards,
+  selectSetFilterForMinCountCards,
   selectSetFilterForPackName,
 } from '../../store/selectors/selectParamsPacks';
 import { selectUserID } from '../../store/selectors/selectUserID';
@@ -28,13 +32,18 @@ export const Packs: React.FC = () => {
   const pageSizeCount = useAppSelector(selectPageSizeCount);
   const packName = useAppSelector(selectSetFilterForPackName);
   const userID = useAppSelector(selectUserID);
+  const min = useAppSelector(selectSetFilterForMinCountCards);
+  const max = useAppSelector(selectSetFilterForMaxCountCards);
 
   useEffect(() => {
     dispatch(setCardsPackTC());
-  }, [dispatch, page, pageSizeCount, packName, userID]);
+  }, [dispatch, page, pageSizeCount, packName, userID, min, max]);
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }
+  const onClickResetFilter: () => void = () => {
+    dispatch(setResetFilter());
+  };
 
   return (
     <div className={s.wrapper}>
@@ -46,6 +55,14 @@ export const Packs: React.FC = () => {
         <InputDebounce />
         <ToggleButton />
         <DoubleRangeSlider />
+        <Button
+          type="primary"
+          icon={<FilterOutlined />}
+          size="middle"
+          onClick={onClickResetFilter}
+        >
+          Reset filter
+        </Button>
       </div>
       <PacksTable />;
     </div>

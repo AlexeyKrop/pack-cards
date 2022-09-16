@@ -9,6 +9,7 @@ import {
   setChangePageSize,
 } from '../../../store/reducers/packsParamsReducer';
 import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
+import { selectPacksStatus } from '../../../store/selectors/selectPacksStatus';
 import {
   selectCardsPacksTotalCount,
   selectCurrentPageCount,
@@ -59,6 +60,7 @@ export const PacksTable: React.FC = () => {
   const cardPacksTotalCount = useAppSelector(selectCardsPacksTotalCount);
   const pageCount = useAppSelector(selectPageSizeCount);
   const currentPage = useAppSelector(selectCurrentPageCount);
+  const packStatus = useAppSelector(selectPacksStatus);
   const dispatch = useAppDispatch();
   const onChangeHandle: (pagination: TablePaginationConfig) => void = pagination => {
     const { current, pageSize, total } = pagination;
@@ -92,6 +94,7 @@ export const PacksTable: React.FC = () => {
 
   return (
     <Table
+      loading={packStatus === 'loading'}
       columns={columns}
       onChange={onChangeHandle}
       dataSource={dataCard}

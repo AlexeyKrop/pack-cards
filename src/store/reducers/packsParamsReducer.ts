@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const initialState = {
   packName: '',
   min: 0,
-  max: 9,
+  max: 100,
   sortPacks: '',
   page: 1 as number | undefined,
   pageCount: 4 as number | undefined,
@@ -38,6 +38,9 @@ const packsParamsSlice = createSlice({
     setFilterForMaxCountCards: (state, action: PayloadAction<{ max: number }>) => {
       state.max = action.payload.max;
     },
+    setResetFilter: () => {
+      return { ...initialState };
+    },
   },
 });
 
@@ -49,4 +52,5 @@ export const {
   setMyCardsPack,
   setFilterForMinCountCards,
   setFilterForMaxCountCards,
+  setResetFilter,
 } = packsParamsSlice.actions;
