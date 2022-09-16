@@ -83,7 +83,7 @@ export const PacksTable: React.FC = () => {
       key: _id,
       name,
       cards: cardsCount,
-      updated,
+      updated: new Date(updated).toLocaleDateString(),
       created: user_name,
       actions: name,
     };
@@ -94,6 +94,7 @@ export const PacksTable: React.FC = () => {
 
   return (
     <Table
+      // sorter={(a: any, b: any) => console.log(a, b)}
       loading={packStatus === 'loading'}
       columns={columns}
       onChange={onChangeHandle}
