@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table, TableProps } from 'antd';
+import { Button, Table, TableProps } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { useNavigate } from 'react-router-dom';
 
@@ -108,9 +108,9 @@ export const PacksTable: React.FC = () => {
     return {
       key: _id,
       name: (
-        <button type="button" onClick={() => onClickHandle(_id)}>
+        <Button type="text" onClick={() => onClickHandle(_id)}>
           {name}
-        </button>
+        </Button>
       ),
       cards: cardsCount,
       updated: new Date(updated).toLocaleDateString(),
