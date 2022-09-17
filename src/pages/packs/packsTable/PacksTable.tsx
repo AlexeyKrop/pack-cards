@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { Table, TableProps } from 'antd';
+import { SorterResult } from 'antd/lib/table/interface';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import {
   setChangePage,
   setChangePageSize,
+  setSortPack,
 } from '../../../store/reducers/packsParamsReducer';
 import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
 import { selectPacksStatus } from '../../../store/selectors/selectPacksStatus';
@@ -28,23 +30,28 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
+    key: 'name',
   },
   {
     title: 'Cards',
     dataIndex: 'cards',
+    key: 'type',
   },
   {
     title: 'Last Updated',
     dataIndex: 'updated',
     sorter: true,
+    key: 'updated',
   },
   {
     title: 'Created By',
     dataIndex: 'created',
+    key: 'created',
   },
   {
     title: 'Actions',
     dataIndex: 'actions',
+    key: 'actions',
   },
 ];
 
@@ -62,13 +69,24 @@ export const PacksTable: React.FC = () => {
     pageCount,
     total: cardPacksTotalCount,
   };
-  const onChangeHandle: TableProps<DataType>['onChange'] = (pagination, filters) => {
-    const { current, pageSize } = pagination;
 
+  // @ts-ignore
+  const onChangeHandle: TableProps<DataType>['onChange'] = (
+    pagination,
+    filters,
+    sorter: SorterResult<DataType>,
+  ) => {
+    const { current, pageSize } = pagination;
+    const { order } = sorter;
+
+    if (order === 'ascend') {
+      dispatch(setSortPack({ value: '1' }));
+    }
+    if (order === 'descend') {
+      dispatch(setSortPack({ value: '0' }));
+    }
     dispatch(setChangePageSize({ pageCount: pageSize }));
     dispatch(setChangePage({ currentPage: current }));
-    // console.log(`total: ${total}`);
-    console.log('params', filters);
   };
   const dataCard = cardPacks.map(({ _id, name, cardsCount, updated, user_name }) => {
     return {
@@ -81,12 +99,8 @@ export const PacksTable: React.FC = () => {
     };
   });
 
-  // console.log(`pageCount: ${pageCount}`);
-  // console.log(`dataCard: ${dataCard.length}`);
-
   return (
     <Table
-      // sorter={(a: any, b: any) => console.log(a, b)}
       loading={packStatus === 'loading'}
       columns={columns}
       onChange={onChangeHandle}

@@ -38,6 +38,9 @@ const packsParamsSlice = createSlice({
     setFilterForMaxCountCards: (state, action: PayloadAction<{ max: number }>) => {
       state.max = action.payload.max;
     },
+    setSortPack: (state, action: PayloadAction<{ value: string }>) => {
+      state.sortPacks = `${action.payload.value}updated`;
+    },
     setResetFilter: () => {
       return { ...initialState };
     },
@@ -46,6 +49,7 @@ const packsParamsSlice = createSlice({
 
 export const packsParamsReducer = packsParamsSlice.reducer;
 export const {
+  setSortPack,
   setChangePage,
   setChangePageSize,
   searchPackName,

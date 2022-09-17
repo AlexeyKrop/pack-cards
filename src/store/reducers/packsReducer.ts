@@ -34,8 +34,7 @@ export const packsReducer = packsSlice.reducer;
 export const { setCardsPack, setCardPacksTotalCount, setPackStatus } = packsSlice.actions;
 
 export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
-  const { page, pageCount, packName, user_id, min, max } = getState().packsParams;
-  const params = { page, pageCount, packName, user_id, min, max };
+  const params = getState().packsParams;
 
   dispatch(setPackStatus({ status: 'loading' }));
   packsAPI
