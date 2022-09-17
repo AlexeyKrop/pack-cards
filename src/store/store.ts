@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import { appReducer } from './reducers/appReducer';
 import { authReducer } from './reducers/authReducer';
+import { cardsReducer } from './reducers/cardsReducer';
 import { createNewPasswordReducer } from './reducers/createNewPasswordReducer';
 import { forgotPasswordReducer } from './reducers/forgotPasswordReducer';
 import { packsParamsReducer } from './reducers/packsParamsReducer';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   packs: packsReducer,
   packsParams: packsParamsReducer,
+  cards: cardsReducer,
 });
 
 export const store = configureStore({

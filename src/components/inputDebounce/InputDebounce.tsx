@@ -8,7 +8,10 @@ import { useDebounce } from '../../hooks/useDebounce/useDebounce';
 import { searchPackName } from '../../store/reducers/packsParamsReducer';
 import { selectSetFilterForPackName } from '../../store/selectors/selectParamsPacks';
 
-export const InputDebounce: React.FC = () => {
+export type InputDebounceType = {
+  placeholder: string;
+};
+export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder }) => {
   const packName = useAppSelector(selectSetFilterForPackName);
   const [inputValue, setInputValue] = useState<string>(packName);
   const dispatch = useAppDispatch();
@@ -27,7 +30,7 @@ export const InputDebounce: React.FC = () => {
     <Input
       allowClear
       defaultValue={packName}
-      placeholder="input name pack"
+      placeholder={placeholder}
       size="large"
       value={inputValue}
       onChange={onChangeInputValue}

@@ -56,7 +56,7 @@ export const Packs: React.FC = () => {
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>
           <h3>Search</h3>
-          <InputDebounce />
+          <InputDebounce placeholder="Provide your text" />
         </div>
         <div className={s.toggleButtonWrapper}>
           <h3>Show packs cards</h3>
@@ -66,7 +66,6 @@ export const Packs: React.FC = () => {
           <h3>Number of cards</h3>
           <DoubleRangeSlider className={s.slider} />
         </div>
-
         <Button
           type="primary"
           icon={<FilterOutlined />}

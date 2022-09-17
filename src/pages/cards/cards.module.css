@@ -1,0 +1,9 @@
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 28px 0;
+}
+.link {
+    color: #000000;
+}
