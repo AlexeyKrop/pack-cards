@@ -10,7 +10,7 @@ import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
-import { setResetFilter, setSortPack } from '../../store/reducers/packsParamsReducer';
+import { setResetFilter } from '../../store/reducers/packsParamsReducer';
 import { setCardsPackTC } from '../../store/reducers/packsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
 import {
@@ -45,12 +45,6 @@ export const Packs: React.FC = () => {
   const onClickResetFilter: () => void = () => {
     dispatch(setResetFilter());
   };
-  const onClickUpSortHandle: () => void = () => {
-    dispatch(setSortPack({ value: '0' }));
-  };
-  const onClickDownSortHandle: () => void = () => {
-    dispatch(setSortPack({ value: '1' }));
-  };
 
   return (
     <div className={s.wrapper}>
@@ -71,12 +65,6 @@ export const Packs: React.FC = () => {
           Reset filter
         </Button>
       </div>
-      <button type="button" onClick={onClickUpSortHandle}>
-        Sort up
-      </button>
-      <button type="button" onClick={onClickDownSortHandle}>
-        Sort down
-      </button>
       <PacksTable />;
     </div>
   );
