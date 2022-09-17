@@ -55,10 +55,15 @@ export const Packs: React.FC = () => {
       </div>
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>
+          <h3>Search</h3>
           <InputDebounce />
         </div>
-        <ToggleButton />
+        <div className={s.toggleButtonWrapper}>
+          <h3>Show packs cards</h3>
+          <ToggleButton />
+        </div>
         <div className={s.doubleRangeSliderWrapper}>
+          <h3>Number of cards</h3>
           <DoubleRangeSlider className={s.slider} />
         </div>
 

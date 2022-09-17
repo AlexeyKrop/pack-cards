@@ -22,4 +22,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
+}
+.toggleButtonWrapper{
+    width: 100%;
+    max-width: 150px;
 }

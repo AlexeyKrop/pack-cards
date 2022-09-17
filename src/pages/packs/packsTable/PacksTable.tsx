@@ -3,6 +3,7 @@ import React from 'react';
 import { Table, TableProps } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 
+import { Actions } from '../../../components/actions/Actions';
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import {
@@ -17,7 +18,6 @@ import {
   selectCurrentPageCount,
   selectPageSizeCount,
 } from '../../../store/selectors/selectParamsPacks';
-import { Actions } from '../../actions/Actions';
 
 type DataType = {
   key: string;

@@ -13,6 +13,8 @@ import {
   selectSetFilterForMinCountCards,
 } from '../../store/selectors/selectParamsPacks';
 
+import s from './doubleRanheSlider.module.css';
+
 const MIN_DEFAULT_RANGE_VALUE = 0;
 const MAX_DEFAULT_RANGE_VALUE = 100;
 
@@ -43,11 +45,11 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }
   };
 
   return (
-    <>
+    <div className={s.wrapper}>
       <InputNumber
         min={1}
         max={100}
-        style={{ margin: '0 16px' }}
+        style={{ margin: '0 16px 0 0' }}
         value={typeof sliderValue[0] === 'number' ? sliderValue[0] : 0}
         onChange={onChangeMinValue}
       />
@@ -62,10 +64,10 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }
       <InputNumber
         min={1}
         max={100}
-        style={{ margin: '0 16px' }}
+        style={{ margin: '0 0 0 16px' }}
         value={typeof sliderValue[1] === 'number' ? sliderValue[1] : 0}
         onChange={onChangeMaxValue}
       />
-    </>
+    </div>
   );
 };
