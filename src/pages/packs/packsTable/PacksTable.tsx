@@ -17,6 +17,7 @@ import {
   selectCurrentPageCount,
   selectPageSizeCount,
 } from '../../../store/selectors/selectParamsPacks';
+import { Actions } from '../../actions/Actions';
 
 type DataType = {
   key: string;
@@ -24,7 +25,7 @@ type DataType = {
   cards: number;
   updated: string;
   created: string;
-  actions: string;
+  actions: React.ReactNode;
 };
 const columns = [
   {
@@ -56,6 +57,7 @@ const columns = [
   {
     title: 'Actions',
     dataIndex: 'actions',
+    width: 160,
     textWrap: 'word-break',
     ellipsis: true,
   },
@@ -101,7 +103,7 @@ export const PacksTable: React.FC = () => {
       cards: cardsCount,
       updated: new Date(updated).toLocaleDateString(),
       created: user_name,
-      actions: name,
+      actions: <Actions />,
     };
   });
 

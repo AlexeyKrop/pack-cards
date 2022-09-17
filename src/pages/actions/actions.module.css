@@ -1,0 +1,15 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.icon{
+    cursor: pointer;
+
+    font-size: 20px;
+    color: #808080;
+}
+
+.icon:hover{
+    color: rgba(128, 128, 128, .6);
+}
