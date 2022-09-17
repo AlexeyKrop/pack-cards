@@ -3,3 +3,23 @@
     align-items: center;
     justify-content: space-between;
 }
+.filterBlock{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 25px 0;
+}
+.inputDebounceWrapper{
+    width: 100%;
+    max-width: 400px;
+}
+.slider{
+    width: 200px;
+}
+.doubleRangeSliderWrapper{
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

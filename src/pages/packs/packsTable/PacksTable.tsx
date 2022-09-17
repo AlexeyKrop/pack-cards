@@ -31,27 +31,33 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
+    textWrap: 'word-break',
+    ellipsis: true,
   },
   {
     title: 'Cards',
     dataIndex: 'cards',
-    key: 'type',
+    textWrap: 'word-break',
+    ellipsis: true,
   },
   {
     title: 'Last Updated',
     dataIndex: 'updated',
     sorter: true,
-    key: 'updated',
+    textWrap: 'word-break',
+    ellipsis: true,
   },
   {
     title: 'Created By',
     dataIndex: 'created',
-    key: 'created',
+    textWrap: 'word-break',
+    ellipsis: true,
   },
   {
     title: 'Actions',
     dataIndex: 'actions',
-    key: 'actions',
+    textWrap: 'word-break',
+    ellipsis: true,
   },
 ];
 

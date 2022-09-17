@@ -53,9 +53,14 @@ export const Packs: React.FC = () => {
         <Button type="primary">Add new pack</Button>
       </div>
       <div className={s.filterBlock}>
-        <InputDebounce />
+        <div className={s.inputDebounceWrapper}>
+          <InputDebounce />
+        </div>
         <ToggleButton />
-        <DoubleRangeSlider />
+        <div className={s.doubleRangeSliderWrapper}>
+          <DoubleRangeSlider className={s.slider} />
+        </div>
+
         <Button
           type="primary"
           icon={<FilterOutlined />}
@@ -65,7 +70,7 @@ export const Packs: React.FC = () => {
           Reset filter
         </Button>
       </div>
-      <PacksTable />;
+      <PacksTable />
     </div>
   );
 };

@@ -16,7 +16,10 @@ import {
 const MIN_DEFAULT_RANGE_VALUE = 0;
 const MAX_DEFAULT_RANGE_VALUE = 100;
 
-export const DoubleRangeSlider: React.FC = () => {
+type DoubleRangeSliderType = {
+  className: string;
+};
+export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }) => {
   const min = useAppSelector(selectSetFilterForMinCountCards);
   const max = useAppSelector(selectSetFilterForMaxCountCards);
   const dispatch = useAppDispatch();
@@ -49,6 +52,7 @@ export const DoubleRangeSlider: React.FC = () => {
         onChange={onChangeMinValue}
       />
       <Slider
+        className={className}
         value={sliderValue}
         onAfterChange={onAfterChange}
         onChange={onChangeSliderTrack}

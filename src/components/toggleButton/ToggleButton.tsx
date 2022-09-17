@@ -24,7 +24,7 @@ export const ToggleButton: React.FC = () => {
   };
 
   return (
-    <Radio.Group defaultValue="all" buttonStyle="solid" style={{ marginTop: 16 }}>
+    <Radio.Group defaultValue="all" buttonStyle="solid">
       <Radio.Button id="myPack" onClick={onClickHandle} value="my">
         My
       </Radio.Button>
