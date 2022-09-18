@@ -39,6 +39,7 @@ export const setCardsCardTC =
     const params = {};
 
     cardsAPI.setCardsCard({ ...params, cardsPack_id: id }).then(res => {
+      console.log(res.data.cards);
       dispatch(setCardsCard({ cards: res.data.cards }));
     });
   };

@@ -16,7 +16,7 @@ export const Cards: React.FC = () => {
   const isLoggedIn = useAppSelector(selectLoggedIn);
 
   if (!isLoggedIn) {
-    return <Navigate to={PATH.CARDS} />;
+    return <Navigate to={PATH.LOGIN} />;
   }
 
   return (
