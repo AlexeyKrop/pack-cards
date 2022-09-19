@@ -26,5 +26,8 @@
 }
 .toggleButtonWrapper{
     width: 100%;
-    max-width: 150px;
+    max-width: 280px;
+}
+.toggleButtonWrapper label{
+    padding: 0 42px;
 }
