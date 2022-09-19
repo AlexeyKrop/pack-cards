@@ -1,10 +1,15 @@
 import React from 'react';
 
+import { LoginOutlined, UserOutlined } from '@ant-design/icons';
+import { Dropdown, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg';
+import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { Avatar } from '../../pages/profile/avatar/Avatar';
+import { PATH } from '../../routing/Pages';
+import { logoutTC } from '../../store/reducers/authReducer';
 import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
 import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
@@ -13,6 +18,30 @@ import s from './header.module.css';
 const Header: React.FC = () => {
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const handleLogout: () => void = () => {
+    dispatch(logoutTC());
+  };
+  const menu = (
+    <Menu
+      items={[
+        {
+          icon: <UserOutlined />,
+          label: <NavLink to={PATH.PROFILE}>Profile</NavLink>,
+          key: '1',
+        },
+        {
+          icon: <LoginOutlined />,
+          label: (
+            <NavLink to={PATH.LOGIN} onClick={handleLogout}>
+              Log out
+            </NavLink>
+          ),
+          key: '2',
+        },
+      ]}
+    />
+  );
 
   return (
     <header className={s.header}>
@@ -23,7 +52,14 @@ const Header: React.FC = () => {
               <img src={logo} alt="logo" />
             </NavLink>
           </div>
-          {isLoggedIn && <Avatar mode="header" name={user.name} width="36px" />}
+          {isLoggedIn && (
+            <Dropdown.Button
+              type="text"
+              overlay={menu}
+              placement="bottomLeft"
+              icon={<Avatar mode="header" name={user.name} width="36px" />}
+            />
+          )}
         </div>
       </div>
     </header>
