@@ -4,6 +4,7 @@ import { FilterOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
+import { CustomModal } from '../../components/customModal/CustomModal';
 import { DoubleRangeSlider } from '../../components/doubleRangeSlider/DoubleRangeSlider';
 import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
 import { SkeletonButton } from '../../components/skeletonButton/SkeletonButton';
@@ -58,7 +59,7 @@ export const Packs: React.FC = () => {
     <div className={s.wrapper}>
       <div className={s.top}>
         <h2 className={s.title}>Packs list</h2>
-        <Button type="primary">Add new pack</Button>
+        <CustomModal />
       </div>
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>

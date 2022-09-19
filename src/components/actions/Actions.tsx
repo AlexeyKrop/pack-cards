@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined, ReadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
-import { selectUserID } from '../../store/selectors/selectProfile/selectUserID';
+import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
 import s from './actions.module.css';
 
@@ -12,7 +12,9 @@ type ActionsType = {
   _id: string;
 };
 export const Actions: React.FC<ActionsType> = ({ _id }) => {
-  const userID = useAppSelector(selectUserID);
+  const user = useAppSelector(selectUser);
+
+  const userID = user._id;
 
   return (
     <div className={s.wrapper}>

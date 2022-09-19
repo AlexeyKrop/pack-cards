@@ -11,6 +11,16 @@ export const packsAPI = {
       },
     );
   },
+  createCardsPack(params: CreateCardsPackParamsType) {
+    return instance.post<CreateCardsPackParamsType, AxiosResponse<CardsPackResponseType>>(
+      `cards/pack`,
+      {
+        cardsPack: {
+          ...params,
+        },
+      },
+    );
+  },
 };
 export type PackType = {
   _id: string;
@@ -51,4 +61,10 @@ export type PacksParamsType = {
   page?: number | undefined;
   pageCount?: number | undefined;
   user_id?: string;
+};
+
+export type CreateCardsPackParamsType = {
+  name?: string;
+  deckCover?: string;
+  private?: boolean;
 };

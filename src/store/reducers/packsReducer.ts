@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import { packsAPI, PackType } from '../../api/packs/packs';
+import { CreateCardsPackParamsType, packsAPI, PackType } from '../../api/packs/packs';
 import { AppThunk } from '../store';
 
 import { RequestStatusType, setAppError } from './appReducer';
@@ -53,3 +53,9 @@ export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
       dispatch(setPackStatus({ status: 'success' }));
     });
 };
+
+export const createCardsPackTC =
+  (params: CreateCardsPackParamsType): AppThunk =>
+  () => {
+    packsAPI.createCardsPack(params).then(res => console.log(res));
+  };

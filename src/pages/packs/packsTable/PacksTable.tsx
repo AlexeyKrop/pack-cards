@@ -106,20 +106,22 @@ export const PacksTable: React.FC = () => {
     dispatch(setChangePageSize({ pageCount: pageSize }));
     dispatch(setChangePage({ currentPage: current }));
   };
-  const dataCard = cardPacks.map(({ _id, name, cardsCount, updated, user_name }) => {
-    return {
-      key: _id,
-      name: (
-        <Button type="text" onClick={() => onClickHandle(_id)}>
-          {name}
-        </Button>
-      ),
-      cards: cardsCount,
-      updated: new Date(updated).toLocaleDateString(),
-      created: user_name,
-      actions: <Actions _id={_id} />,
-    };
-  });
+  const dataCard = cardPacks.map(
+    ({ _id, name, cardsCount, updated, user_name, user_id }) => {
+      return {
+        key: _id,
+        name: (
+          <Button type="text" onClick={() => onClickHandle(_id)}>
+            {name}
+          </Button>
+        ),
+        cards: cardsCount,
+        updated: new Date(updated).toLocaleDateString(),
+        created: user_name,
+        actions: <Actions _id={user_id} />,
+      };
+    },
+  );
 
   return (
     <Table
