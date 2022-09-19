@@ -8,7 +8,7 @@ const initialState = {
   max: 5,
   sortCards: '',
   page: 1 as number | undefined,
-  pageCount: 7,
+  pageCount: 4 as number | undefined,
 };
 const cardsParamsSlice = createSlice({
   name: 'cardsParams',
@@ -23,11 +23,22 @@ const cardsParamsSlice = createSlice({
     ) => {
       state.page = action.payload.currentPage;
     },
-    setChangePageSize: (state, action: PayloadAction<{ pageCount: number }>) => {
+    setChangeCardsPageSize: (
+      state,
+      action: PayloadAction<{ pageCount: number | undefined }>,
+    ) => {
       state.pageCount = action.payload.pageCount;
+    },
+    setSortCards: (state, action: PayloadAction<{ value: string }>) => {
+      state.sortCards = `${action.payload.value}updated`;
     },
   },
 });
 
 export const cardsParamsReducer = cardsParamsSlice.reducer;
-export const { setChangeCardsPage, setChangeCardId } = cardsParamsSlice.actions;
+export const {
+  setChangeCardsPage,
+  setChangeCardId,
+  setChangeCardsPageSize,
+  setSortCards,
+} = cardsParamsSlice.actions;

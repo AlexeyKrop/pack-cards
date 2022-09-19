@@ -5,13 +5,17 @@ import { SorterResult } from 'antd/lib/table/interface';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
-import { setChangeCardsPage } from '../../../store/reducers/cardsParamsReducer';
-import { setSortPack } from '../../../store/reducers/packsParamsReducer';
-import { selectCardsStatus } from '../../../store/selectors/selectCards/selectCardsStatus';
 import {
-  selectCurrentPageCount,
-  selectPageSizeCount,
-} from '../../../store/selectors/selectPacks/selectParamsPacks';
+  setChangeCardsPage,
+  setChangeCardsPageSize,
+  setSortCards,
+} from '../../../store/reducers/cardsParamsReducer';
+import { selectCardsStatus } from '../../../store/selectors/selectCards/selectCardsStatus';
+import { selectCardsTotalCount } from '../../../store/selectors/selectCards/selectCardsTotalCount';
+import {
+  selectCardsCurrentPageCount,
+  selectCardsPageSizeCount,
+} from '../../../store/selectors/selectCards/selectParamsCards';
 
 type DataType = {
   key: string;
@@ -51,9 +55,9 @@ const columns = [
 
 export const CardsTable: React.FC = () => {
   const cards = useAppSelector(state => state.cards.cards);
-  const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount);
-  const pageCount = useAppSelector(selectPageSizeCount);
-  const currentPage = useAppSelector(selectCurrentPageCount);
+  const cardsTotalCount = useAppSelector(selectCardsTotalCount);
+  const pageCount = useAppSelector(selectCardsPageSizeCount);
+  const currentPage = useAppSelector(selectCardsCurrentPageCount);
   const status = useAppSelector(selectCardsStatus);
   const dispatch = useAppDispatch();
   const pagination = {
@@ -73,13 +77,13 @@ export const CardsTable: React.FC = () => {
     const { current, pageSize } = pagination;
     const { order } = sorter;
 
-    console.log(pageSize, current);
     if (order === 'ascend') {
-      dispatch(setSortPack({ value: '1' }));
+      dispatch(setSortCards({ value: '1' }));
     }
     if (order === 'descend') {
-      dispatch(setSortPack({ value: '0' }));
+      dispatch(setSortCards({ value: '0' }));
     }
+    dispatch(setChangeCardsPageSize({ pageCount: pageSize }));
     dispatch(setChangeCardsPage({ currentPage: current }));
   };
   const dataCard = cards.map(({ _id, updated, question, grade, answer }) => {

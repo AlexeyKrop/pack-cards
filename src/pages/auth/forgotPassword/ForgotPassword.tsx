@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { forgotPasswordTC } from '../../../store/reducers/forgotPasswordReducer';
-import { selectIsSendEmail } from '../../../store/selectors/selectIsSendEmail';
+import { selectIsSendEmail } from '../../../store/selectors/selectAuth/selectIsSendEmail';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './forgotPassword.module.css';

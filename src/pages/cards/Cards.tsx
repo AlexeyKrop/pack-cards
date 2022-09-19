@@ -9,19 +9,26 @@ import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
 import { setCardsCardTC } from '../../store/reducers/cardsReducer';
+import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
 import { selectCardsStatus } from '../../store/selectors/selectCards/selectCardsStatus';
-import { selectCardsPack_id } from '../../store/selectors/selectCards/selectParamsCards';
-import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
+import {
+  selectCardsCurrentPageCount,
+  selectCardsPack_id,
+  selectCardsPageSizeCount,
+  selectSortCards,
+} from '../../store/selectors/selectCards/selectParamsCards';
 import { restoreState } from '../../utils/localStorage';
 
 import s from './cards.module.css';
 import { CardsTable } from './cardsTable/CardsTable';
 
 export const Cards: React.FC = () => {
-  const page = useAppSelector(state => state.cardsParams.page);
+  const page = useAppSelector(selectCardsCurrentPageCount);
   const cardsPack_id = useAppSelector(selectCardsPack_id);
   const status = useAppSelector(selectCardsStatus);
   const isLoggedIn = useAppSelector(selectLoggedIn);
+  const pageSizeCount = useAppSelector(selectCardsPageSizeCount);
+  const sortCards = useAppSelector(selectSortCards);
   const dispatch = useAppDispatch();
   const getCardIdFromLocalStorage: () => string = () => {
     return restoreState<string>('cardsId', '');
@@ -31,7 +38,7 @@ export const Cards: React.FC = () => {
     const cardsPackID = getCardIdFromLocalStorage();
 
     dispatch(setCardsCardTC(cardsPackID));
-  }, [dispatch, page, cardsPack_id]);
+  }, [dispatch, page, cardsPack_id, pageSizeCount, sortCards]);
 
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;

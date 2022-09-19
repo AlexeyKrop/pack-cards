@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { Avatar } from '../../pages/profile/avatar/Avatar';
-import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
+import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
 import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
 import s from './header.module.css';

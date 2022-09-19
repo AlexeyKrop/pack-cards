@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { loginTC } from '../../../store/reducers/authReducer';
-import { selectLoggedIn } from '../../../store/selectors/selectLoggedIn';
+import { selectLoggedIn } from '../../../store/selectors/selectAuth/selectLoggedIn';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 import s from '../signUp/signUp.module.css';
 

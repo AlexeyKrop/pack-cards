@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
 import { createNewPasswordTC } from '../../../store/reducers/createNewPasswordReducer';
-import { selectIsCreateNewPassword } from '../../../store/selectors/selectIsCreateNewPassword';
+import { selectIsCreateNewPassword } from '../../../store/selectors/selectAuth/selectIsCreateNewPassword';
 import { CustomAuthButton } from '../customAuthButton/CustomAuthButton';
 
 import s from './createNewPassword.module.css';

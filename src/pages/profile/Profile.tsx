@@ -10,7 +10,7 @@ import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
 import { logoutTC } from '../../store/reducers/authReducer';
 import { updateUserProfileTC } from '../../store/reducers/profileReducer';
-import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
+import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
 import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
 import { Avatar } from './avatar/Avatar';

@@ -12,7 +12,7 @@ import { SignUp } from '../pages/auth/signUp/SignUp';
 import { Cards } from '../pages/cards/Cards';
 import { Packs } from '../pages/packs/Packs';
 import Profile from '../pages/profile/Profile';
-import { selectAppStatus } from '../store/selectors/selectAppStatus';
+import { selectAppStatus } from '../store/selectors/selectApp/selectAppStatus';
 
 export const PATH = {
   PROFILE: '/profile',
@@ -22,7 +22,7 @@ export const PATH = {
   CREATE_PASSWORD: '/create-password/:token',
   CHECK_EMAIL: '/check-email',
   PACKS: '/packs',
-  CARDS: '/cards/:id',
+  CARDS: '/cards',
   LEARN: '/learn/:packId/:packName',
 };
 
