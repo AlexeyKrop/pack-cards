@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 
 import { Input } from 'antd';
 
@@ -12,10 +12,17 @@ import SkeletonInput from '../skeletonInput/SkeletonInput';
 export type InputDebounceType = {
   placeholder: string;
   disabled: boolean;
+  inputValue?: string;
+  changeInputValue?: (value: string) => void;
 };
-export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder, disabled }) => {
+export const InputDebounce: React.FC<InputDebounceType> = ({
+  inputValue,
+  changeInputValue,
+  placeholder,
+  disabled,
+}) => {
   const packName = useAppSelector(selectSetFilterForPackName);
-  const [inputValue, setInputValue] = useState<string>(packName);
+
   const dispatch = useAppDispatch();
   const debouncedSearchTerm = useDebounce(inputValue);
 
@@ -25,7 +32,9 @@ export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder, disabl
   const onChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void = e => {
     const { value } = e.currentTarget;
 
-    setInputValue(value);
+    if (changeInputValue) {
+      changeInputValue(value);
+    }
   };
 
   if (disabled) {

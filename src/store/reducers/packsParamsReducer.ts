@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
-  packName: '',
+  packName: '' as string | undefined,
   min: 0,
   max: 100,
   sortPacks: '',
@@ -26,7 +26,7 @@ const packsParamsSlice = createSlice({
     ) => {
       state.pageCount = action.payload.pageCount;
     },
-    searchPackName: (state, action: PayloadAction<{ packName: string }>) => {
+    searchPackName: (state, action: PayloadAction<{ packName: string | undefined }>) => {
       state.packName = action.payload.packName;
     },
     setMyCardsPack: (state, action: PayloadAction<{ id: string }>) => {

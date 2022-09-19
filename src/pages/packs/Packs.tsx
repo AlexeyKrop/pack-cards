@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FilterOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -39,6 +39,8 @@ export const Packs: React.FC = () => {
   const min = useAppSelector(selectSetFilterForMinCountCards);
   const max = useAppSelector(selectSetFilterForMaxCountCards);
   const sortPacks = useAppSelector(selectSortPacksCards);
+  const [myAllSortBtnValue, setMyAllSortBtnValue] = useState<string>('All');
+  const [searchPackNameInputValue, setSearchPackNameInputValue] = useState<string>('');
 
   useEffect(() => {
     dispatch(setCardsPackTC());
@@ -48,6 +50,8 @@ export const Packs: React.FC = () => {
   }
   const onClickResetFilter: () => void = () => {
     dispatch(setResetFilter());
+    setMyAllSortBtnValue('All');
+    setSearchPackNameInputValue('');
   };
 
   return (
@@ -61,12 +65,18 @@ export const Packs: React.FC = () => {
           <h3>Search</h3>
           <InputDebounce
             disabled={status === 'loading'}
+            inputValue={searchPackNameInputValue}
+            changeInputValue={setSearchPackNameInputValue}
             placeholder="Provide your text"
           />
         </div>
         <div className={s.toggleButtonWrapper}>
           <h3>Show packs cards</h3>
-          <ToggleButton disabled={status === 'loading'} />
+          <ToggleButton
+            disabled={status === 'loading'}
+            btnValue={myAllSortBtnValue}
+            toggleCallback={setMyAllSortBtnValue}
+          />
         </div>
         <div className={s.doubleRangeSliderWrapper}>
           <h3>Number of cards</h3>

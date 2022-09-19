@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Radio, RadioChangeEvent } from 'antd';
 
@@ -10,6 +10,8 @@ import { SkeletonButton } from '../skeletonButton/SkeletonButton';
 
 type ToggleButtonType = {
   disabled: boolean;
+  btnValue: string;
+  toggleCallback: (value: string) => void;
 };
 const options = [
   {
@@ -22,11 +24,14 @@ const options = [
   },
 ];
 
-export const ToggleButton: React.FC<ToggleButtonType> = ({ disabled }) => {
+export const ToggleButton: React.FC<ToggleButtonType> = ({
+  disabled,
+  btnValue,
+  toggleCallback,
+}) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const userID = user._id;
-  const [btnValue, setBtnValue] = useState<string>('All');
 
   const onChange: (e: RadioChangeEvent) => void = ({ target: { value } }) => {
     if (value === 'My') {
@@ -35,7 +40,7 @@ export const ToggleButton: React.FC<ToggleButtonType> = ({ disabled }) => {
     if (value === 'All') {
       dispatch(setMyCardsPack({ id: '' }));
     }
-    setBtnValue(value);
+    toggleCallback(value);
   };
 
   if (disabled) {
@@ -45,7 +50,6 @@ export const ToggleButton: React.FC<ToggleButtonType> = ({ disabled }) => {
   return (
     <Radio.Group
       size="large"
-      defaultValue="All"
       options={options}
       onChange={onChange}
       value={btnValue}
