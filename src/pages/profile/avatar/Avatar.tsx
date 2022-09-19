@@ -15,7 +15,7 @@ type AvatarType = {
 export const Avatar: React.FC<AvatarType> = ({ mode, width, name }) => {
   return (
     <div className={s.block}>
-      {mode === 'header' && <p style={{ marginRight: 5, marginBottom: 0 }}>{name}</p>}
+      {mode === 'header' && <p style={{ margin: '0 5px' }}>{name}</p>}
       <img style={{ width }} src={avatar} alt="avatar" />
       {mode === 'profile' && (
         <div className={s.circle}>
