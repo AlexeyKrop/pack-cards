@@ -46,5 +46,7 @@ export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
       );
     })
     .catch((err: AxiosError) => dispatch(setAppError({ error: err.message })))
-    .finally(() => dispatch(setPackStatus({ status: 'success' })));
+    .finally(() => {
+      dispatch(setPackStatus({ status: 'success' }));
+    });
 };

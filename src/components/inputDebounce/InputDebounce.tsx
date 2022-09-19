@@ -10,8 +10,9 @@ import { selectSetFilterForPackName } from '../../store/selectors/selectPacks/se
 
 export type InputDebounceType = {
   placeholder: string;
+  disabled: boolean;
 };
-export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder }) => {
+export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder, disabled }) => {
   const packName = useAppSelector(selectSetFilterForPackName);
   const [inputValue, setInputValue] = useState<string>(packName);
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder }) => {
 
   return (
     <Input
+      disabled={disabled}
       allowClear
       defaultValue={packName}
       placeholder={placeholder}

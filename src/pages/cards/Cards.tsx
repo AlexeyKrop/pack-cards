@@ -47,7 +47,7 @@ export const Cards: React.FC = () => {
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>
           <h3>Search</h3>
-          <InputDebounce placeholder="Provide your text" />
+          <InputDebounce disabled={false} placeholder="Provide your text" />
         </div>
       </div>
       <CardsTable />

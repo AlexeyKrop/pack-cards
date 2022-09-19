@@ -23,14 +23,15 @@ const cardsSlice = createSlice({
     ) => {
       state.cardsTotalCount = action.payload.cardsTotalCount;
     },
-    setPackStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
+    setCardsStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
       state.cardsStatus = action.payload.status;
     },
   },
 });
 
 export const cardsReducer = cardsSlice.reducer;
-export const { setCardsCard, setCardsCardTotalCount, setPackStatus } = cardsSlice.actions;
+export const { setCardsCard, setCardsCardTotalCount, setCardsStatus } =
+  cardsSlice.actions;
 
 // THUNK
 export const setCardsCardTC =

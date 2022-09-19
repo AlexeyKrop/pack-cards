@@ -20,8 +20,12 @@ const MAX_DEFAULT_RANGE_VALUE = 100;
 
 type DoubleRangeSliderType = {
   className: string;
+  disabled: boolean;
 };
-export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }) => {
+export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({
+  className,
+  disabled,
+}) => {
   const min = useAppSelector(selectSetFilterForMinCountCards);
   const max = useAppSelector(selectSetFilterForMaxCountCards);
   const dispatch = useAppDispatch();
@@ -47,6 +51,7 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }
   return (
     <div className={s.wrapper}>
       <InputNumber
+        disabled={disabled}
         min={1}
         max={100}
         style={{ margin: '0 16px 0 0' }}
@@ -54,6 +59,7 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }
         onChange={onChangeMinValue}
       />
       <Slider
+        disabled={disabled}
         className={className}
         value={sliderValue}
         onAfterChange={onAfterChange}
@@ -62,6 +68,7 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({ className }
         defaultValue={[MIN_DEFAULT_RANGE_VALUE, MAX_DEFAULT_RANGE_VALUE]}
       />
       <InputNumber
+        disabled={disabled}
         min={1}
         max={100}
         style={{ margin: '0 0 0 16px' }}

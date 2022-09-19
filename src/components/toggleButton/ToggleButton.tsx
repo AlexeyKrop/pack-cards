@@ -7,7 +7,10 @@ import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { setMyCardsPack } from '../../store/reducers/packsParamsReducer';
 import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
-export const ToggleButton: React.FC = () => {
+type ToggleButtonType = {
+  disabled: boolean;
+};
+export const ToggleButton: React.FC<ToggleButtonType> = ({ disabled }) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const userID = user._id;
@@ -24,7 +27,7 @@ export const ToggleButton: React.FC = () => {
   };
 
   return (
-    <Radio.Group defaultValue="all" buttonStyle="solid" size="large">
+    <Radio.Group defaultValue="all" buttonStyle="solid" size="large" disabled={disabled}>
       <Radio.Button
         id="myPack"
         onClick={onClickHandle}

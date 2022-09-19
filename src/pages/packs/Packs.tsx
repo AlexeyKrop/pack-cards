@@ -13,6 +13,7 @@ import { PATH } from '../../routing/Pages';
 import { setResetFilter } from '../../store/reducers/packsParamsReducer';
 import { setCardsPackTC } from '../../store/reducers/packsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
+import { selectPacksStatus } from '../../store/selectors/selectPacks/selectPacksStatus';
 import {
   selectCurrentPageCount,
   selectPageSizeCount,
@@ -28,6 +29,7 @@ import { PacksTable } from './packsTable/PacksTable';
 
 export const Packs: React.FC = () => {
   const dispatch = useAppDispatch();
+  const status = useAppSelector(selectPacksStatus);
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const page = useAppSelector(selectCurrentPageCount);
   const pageSizeCount = useAppSelector(selectPageSizeCount);
@@ -56,15 +58,18 @@ export const Packs: React.FC = () => {
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>
           <h3>Search</h3>
-          <InputDebounce placeholder="Provide your text" />
+          <InputDebounce
+            disabled={status === 'loading'}
+            placeholder="Provide your text"
+          />
         </div>
         <div className={s.toggleButtonWrapper}>
           <h3>Show packs cards</h3>
-          <ToggleButton />
+          <ToggleButton disabled={status === 'loading'} />
         </div>
         <div className={s.doubleRangeSliderWrapper}>
           <h3>Number of cards</h3>
-          <DoubleRangeSlider className={s.slider} />
+          <DoubleRangeSlider disabled={status === 'loading'} className={s.slider} />
         </div>
         <Button
           type="primary"
