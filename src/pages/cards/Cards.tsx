@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Navigate, NavLink } from 'react-router-dom';
 
 import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
+import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
+import { setCardsCardTC } from '../../store/reducers/cardsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
+import { restoreState } from '../../utils/localStorage';
 
 import s from './cards.module.css';
 import { CardsTable } from './cardsTable/CardsTable';
 
 export const Cards: React.FC = () => {
+  const page = useAppSelector(state => state.cardsParams.page);
+  const cardsPack_id = useAppSelector(state => state.cardsParams.cardsPack_id);
   const isLoggedIn = useAppSelector(selectLoggedIn);
+  const dispatch = useAppDispatch();
+  const getCardIdFromLocalStorage: () => string = () => {
+    return restoreState<string>('cardsId', '');
+  };
+
+  useEffect(() => {
+    const cardsPackID = getCardIdFromLocalStorage();
+
+    dispatch(setCardsCardTC(cardsPackID));
+  }, [dispatch, page, cardsPack_id]);
 
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;

@@ -17,7 +17,7 @@ const cardsSlice = createSlice({
     setCardsCard: (state, action: PayloadAction<{ cards: CardType[] }>) => {
       state.cards = action.payload.cards;
     },
-    setCardPacksTotalCount: (
+    setCardsCardTotalCount: (
       state,
       action: PayloadAction<{ cardsTotalCount: number }>,
     ) => {
@@ -30,16 +30,16 @@ const cardsSlice = createSlice({
 });
 
 export const cardsReducer = cardsSlice.reducer;
-export const { setCardsCard, setCardPacksTotalCount, setPackStatus } = cardsSlice.actions;
+export const { setCardsCard, setCardsCardTotalCount, setPackStatus } = cardsSlice.actions;
 
 // THUNK
 export const setCardsCardTC =
-  (id: string): AppThunk =>
-  dispatch => {
-    const params = {};
+  (cardsPack_id: string): AppThunk =>
+  (dispatch, getState) => {
+    const { cardsParams } = getState();
 
-    cardsAPI.setCardsCard({ ...params, cardsPack_id: id }).then(res => {
-      console.log(res.data.cards);
+    cardsAPI.setCardsCard({ ...cardsParams, cardsPack_id }).then(res => {
       dispatch(setCardsCard({ cards: res.data.cards }));
+      dispatch(setCardsCardTotalCount({ cardsTotalCount: res.data.cardsTotalCount }));
     });
   };

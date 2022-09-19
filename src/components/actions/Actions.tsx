@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined, ReadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
-import { selectUserID } from '../../store/selectors/selectUserID';
+import { selectUserID } from '../../store/selectors/selectProfile/selectUserID';
 
 import s from './actions.module.css';
 

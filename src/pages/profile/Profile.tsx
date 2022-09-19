@@ -11,7 +11,7 @@ import { PATH } from '../../routing/Pages';
 import { logoutTC } from '../../store/reducers/authReducer';
 import { updateUserProfileTC } from '../../store/reducers/profileReducer';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
-import { selectUser } from '../../store/selectors/selectUser';
+import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
 import { Avatar } from './avatar/Avatar';
 import s from './profile.module.css';

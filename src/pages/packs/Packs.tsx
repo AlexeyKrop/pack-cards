@@ -20,8 +20,8 @@ import {
   selectSetFilterForMinCountCards,
   selectSetFilterForPackName,
   selectSortPackstCards,
-} from '../../store/selectors/selectParamsPacks';
-import { selectUserID } from '../../store/selectors/selectUserID';
+} from '../../store/selectors/selectPacks/selectParamsPacks';
+import { selectUserID } from '../../store/selectors/selectProfile/selectUserID';
 
 import s from './packs.module.css';
 import { PacksTable } from './packsTable/PacksTable';

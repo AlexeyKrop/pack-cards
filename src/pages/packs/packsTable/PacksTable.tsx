@@ -8,19 +8,20 @@ import { Actions } from '../../../components/actions/Actions';
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../../routing/Pages';
-import { setCardsCardTC } from '../../../store/reducers/cardsReducer';
+import { setChangeCardId } from '../../../store/reducers/cardsParamsReducer';
 import {
   setChangePage,
   setChangePageSize,
   setSortPack,
 } from '../../../store/reducers/packsParamsReducer';
-import { selectCardsPack } from '../../../store/selectors/selectCardsPack';
-import { selectPacksStatus } from '../../../store/selectors/selectPacksStatus';
+import { selectCardsPack } from '../../../store/selectors/selectPacks/selectCardsPack';
+import { selectPacksStatus } from '../../../store/selectors/selectPacks/selectPacksStatus';
 import {
   selectCardsPacksTotalCount,
   selectCurrentPageCount,
   selectPageSizeCount,
-} from '../../../store/selectors/selectParamsPacks';
+} from '../../../store/selectors/selectPacks/selectParamsPacks';
+import { saveState } from '../../../utils/localStorage';
 
 type DataType = {
   key: string;
@@ -83,7 +84,8 @@ export const PacksTable: React.FC = () => {
   };
 
   const onClickHandle: (id: string) => void = id => {
-    dispatch(setCardsCardTC(id));
+    saveState('cardsId', id);
+    dispatch(setChangeCardId({ cardsPack_id: id }));
     navigate(PATH.CARDS);
   };
   // @ts-ignore

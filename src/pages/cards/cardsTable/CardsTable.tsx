@@ -5,16 +5,12 @@ import { SorterResult } from 'antd/lib/table/interface';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
+import { setChangeCardsPage } from '../../../store/reducers/cardsParamsReducer';
+import { setSortPack } from '../../../store/reducers/packsParamsReducer';
 import {
-  setChangePage,
-  setChangePageSize,
-  setSortPack,
-} from '../../../store/reducers/packsParamsReducer';
-import {
-  selectCardsPacksTotalCount,
   selectCurrentPageCount,
   selectPageSizeCount,
-} from '../../../store/selectors/selectParamsPacks';
+} from '../../../store/selectors/selectPacks/selectParamsPacks';
 
 type DataType = {
   key: string;
@@ -54,16 +50,16 @@ const columns = [
 
 export const CardsTable: React.FC = () => {
   const cards = useAppSelector(state => state.cards.cards);
-  const cardPacksTotalCount = useAppSelector(selectCardsPacksTotalCount);
+  const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount);
   const pageCount = useAppSelector(selectPageSizeCount);
   const currentPage = useAppSelector(selectCurrentPageCount);
   const dispatch = useAppDispatch();
   const pagination = {
     current: currentPage,
     defaultPageSize: pageCount,
-    pageSizeOptions: [4, 8, 16, 32, 64],
+    pageSizeOptions: [8, 16, 32, 64, 128],
     pageCount,
-    total: cardPacksTotalCount,
+    total: cardsTotalCount,
   };
 
   // @ts-ignore
@@ -75,14 +71,14 @@ export const CardsTable: React.FC = () => {
     const { current, pageSize } = pagination;
     const { order } = sorter;
 
+    console.log(pageSize, current);
     if (order === 'ascend') {
       dispatch(setSortPack({ value: '1' }));
     }
     if (order === 'descend') {
       dispatch(setSortPack({ value: '0' }));
     }
-    dispatch(setChangePageSize({ pageCount: pageSize }));
-    dispatch(setChangePage({ currentPage: current }));
+    dispatch(setChangeCardsPage({ currentPage: current }));
   };
   const dataCard = cards.map(({ _id, updated, grade, question, answer }) => {
     return {

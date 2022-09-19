@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { useDebounce } from '../../hooks/useDebounce/useDebounce';
 import { searchPackName } from '../../store/reducers/packsParamsReducer';
-import { selectSetFilterForPackName } from '../../store/selectors/selectParamsPacks';
+import { selectSetFilterForPackName } from '../../store/selectors/selectPacks/selectParamsPacks';
 
 export type InputDebounceType = {
   placeholder: string;

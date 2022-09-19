@@ -11,7 +11,7 @@ import {
 import {
   selectSetFilterForMaxCountCards,
   selectSetFilterForMinCountCards,
-} from '../../store/selectors/selectParamsPacks';
+} from '../../store/selectors/selectPacks/selectParamsPacks';
 
 import s from './doubleRanheSlider.module.css';
 

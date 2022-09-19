@@ -5,7 +5,7 @@ import { Radio } from 'antd';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { setMyCardsPack } from '../../store/reducers/packsParamsReducer';
-import { selectUser } from '../../store/selectors/selectUser';
+import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 
 export const ToggleButton: React.FC = () => {
   const user = useAppSelector(selectUser);
