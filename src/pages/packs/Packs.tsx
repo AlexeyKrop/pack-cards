@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 import { DoubleRangeSlider } from '../../components/doubleRangeSlider/DoubleRangeSlider';
 import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
+import { SkeletonButton } from '../../components/skeletonButton/SkeletonButton';
 import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
@@ -71,14 +72,18 @@ export const Packs: React.FC = () => {
           <h3>Number of cards</h3>
           <DoubleRangeSlider disabled={status === 'loading'} className={s.slider} />
         </div>
-        <Button
-          type="primary"
-          icon={<FilterOutlined />}
-          size="middle"
-          onClick={onClickResetFilter}
-        >
-          Reset filter
-        </Button>
+        {status === 'loading' ? (
+          <SkeletonButton size="large" />
+        ) : (
+          <Button
+            type="primary"
+            icon={<FilterOutlined />}
+            size="middle"
+            onClick={onClickResetFilter}
+          >
+            Reset filter
+          </Button>
+        )}
       </div>
       <PacksTable />
     </div>

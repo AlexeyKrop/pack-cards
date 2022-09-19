@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { setMyCardsPack } from '../../store/reducers/packsParamsReducer';
 import { selectUser } from '../../store/selectors/selectProfile/selectUser';
+import { SkeletonButton } from '../skeletonButton/SkeletonButton';
 
 type ToggleButtonType = {
   disabled: boolean;
@@ -26,8 +27,12 @@ export const ToggleButton: React.FC<ToggleButtonType> = ({ disabled }) => {
     }
   };
 
+  if (disabled) {
+    return <SkeletonButton width={150} active size="large" />;
+  }
+
   return (
-    <Radio.Group defaultValue="all" buttonStyle="solid" size="large" disabled={disabled}>
+    <Radio.Group defaultValue="all" buttonStyle="solid" size="large">
       <Radio.Button
         id="myPack"
         onClick={onClickHandle}

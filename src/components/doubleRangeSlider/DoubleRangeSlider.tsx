@@ -12,6 +12,7 @@ import {
   selectSetFilterForMaxCountCards,
   selectSetFilterForMinCountCards,
 } from '../../store/selectors/selectPacks/selectParamsPacks';
+import SkeletonInput from '../skeletonInput/SkeletonInput';
 
 import s from './doubleRanheSlider.module.css';
 
@@ -48,10 +49,13 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({
     setSliderValue([sliderValue[1], value]);
   };
 
+  if (disabled) {
+    return <SkeletonInput width={320} active size="large" />;
+  }
+
   return (
     <div className={s.wrapper}>
       <InputNumber
-        disabled={disabled}
         min={1}
         max={100}
         style={{ margin: '0 16px 0 0' }}
@@ -59,7 +63,6 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({
         onChange={onChangeMinValue}
       />
       <Slider
-        disabled={disabled}
         className={className}
         value={sliderValue}
         onAfterChange={onAfterChange}
@@ -68,7 +71,6 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = ({
         defaultValue={[MIN_DEFAULT_RANGE_VALUE, MAX_DEFAULT_RANGE_VALUE]}
       />
       <InputNumber
-        disabled={disabled}
         min={1}
         max={100}
         style={{ margin: '0 0 0 16px' }}

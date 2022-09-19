@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { useDebounce } from '../../hooks/useDebounce/useDebounce';
 import { searchPackName } from '../../store/reducers/packsParamsReducer';
 import { selectSetFilterForPackName } from '../../store/selectors/selectPacks/selectParamsPacks';
+import SkeletonInput from '../skeletonInput/SkeletonInput';
 
 export type InputDebounceType = {
   placeholder: string;
@@ -27,9 +28,12 @@ export const InputDebounce: React.FC<InputDebounceType> = ({ placeholder, disabl
     setInputValue(value);
   };
 
+  if (disabled) {
+    return <SkeletonInput width={400} active size="large" />;
+  }
+
   return (
     <Input
-      disabled={disabled}
       allowClear
       defaultValue={packName}
       placeholder={placeholder}
