@@ -9,6 +9,8 @@ import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
 import { setCardsCardTC } from '../../store/reducers/cardsReducer';
+import { selectCardsStatus } from '../../store/selectors/selectCards/selectCardsStatus';
+import { selectCardsPack_id } from '../../store/selectors/selectCards/selectParamsCards';
 import { selectLoggedIn } from '../../store/selectors/selectLoggedIn';
 import { restoreState } from '../../utils/localStorage';
 
@@ -17,7 +19,8 @@ import { CardsTable } from './cardsTable/CardsTable';
 
 export const Cards: React.FC = () => {
   const page = useAppSelector(state => state.cardsParams.page);
-  const cardsPack_id = useAppSelector(state => state.cardsParams.cardsPack_id);
+  const cardsPack_id = useAppSelector(selectCardsPack_id);
+  const status = useAppSelector(selectCardsStatus);
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const dispatch = useAppDispatch();
   const getCardIdFromLocalStorage: () => string = () => {
@@ -47,7 +50,10 @@ export const Cards: React.FC = () => {
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>
           <h3>Search</h3>
-          <InputDebounce disabled={false} placeholder="Provide your text" />
+          <InputDebounce
+            disabled={status === 'loading'}
+            placeholder="Provide your text"
+          />
         </div>
       </div>
       <CardsTable />

@@ -21,7 +21,7 @@ import {
   selectSetFilterForMaxCountCards,
   selectSetFilterForMinCountCards,
   selectSetFilterForPackName,
-  selectSortPackstCards,
+  selectSortPacksCards,
 } from '../../store/selectors/selectPacks/selectParamsPacks';
 import { selectUserID } from '../../store/selectors/selectProfile/selectUserID';
 
@@ -38,7 +38,7 @@ export const Packs: React.FC = () => {
   const userID = useAppSelector(selectUserID);
   const min = useAppSelector(selectSetFilterForMinCountCards);
   const max = useAppSelector(selectSetFilterForMaxCountCards);
-  const sortPacks = useAppSelector(selectSortPackstCards);
+  const sortPacks = useAppSelector(selectSortPacksCards);
 
   useEffect(() => {
     dispatch(setCardsPackTC());

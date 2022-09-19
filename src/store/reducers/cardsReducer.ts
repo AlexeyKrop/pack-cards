@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
 
 import { cardsAPI, CardType } from '../../api/cards/cards';
 import { AppThunk } from '../store';
 
-import { RequestStatusType } from './appReducer';
+import { RequestStatusType, setAppError } from './appReducer';
 
 const initialState = {
   cards: [] as CardType[],
@@ -39,8 +40,13 @@ export const setCardsCardTC =
   (dispatch, getState) => {
     const { cardsParams } = getState();
 
-    cardsAPI.setCardsCard({ ...cardsParams, cardsPack_id }).then(res => {
-      dispatch(setCardsCard({ cards: res.data.cards }));
-      dispatch(setCardsCardTotalCount({ cardsTotalCount: res.data.cardsTotalCount }));
-    });
+    dispatch(setCardsStatus({ status: 'loading' }));
+    cardsAPI
+      .setCardsCard({ ...cardsParams, cardsPack_id })
+      .then(res => {
+        dispatch(setCardsCard({ cards: res.data.cards }));
+        dispatch(setCardsStatus({ status: 'success' }));
+        dispatch(setCardsCardTotalCount({ cardsTotalCount: res.data.cardsTotalCount }));
+      })
+      .catch((err: AxiosError) => dispatch(setAppError({ error: err.message })));
   };

@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { Table, TableProps } from 'antd';
+import { Rate, Table, TableProps } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { setChangeCardsPage } from '../../../store/reducers/cardsParamsReducer';
 import { setSortPack } from '../../../store/reducers/packsParamsReducer';
+import { selectCardsStatus } from '../../../store/selectors/selectCards/selectCardsStatus';
 import {
   selectCurrentPageCount,
   selectPageSizeCount,
@@ -17,7 +18,7 @@ type DataType = {
   question: string;
   answer: string;
   updated: string;
-  grade: number;
+  grade: React.ReactNode;
 };
 const columns = [
   {
@@ -53,11 +54,12 @@ export const CardsTable: React.FC = () => {
   const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount);
   const pageCount = useAppSelector(selectPageSizeCount);
   const currentPage = useAppSelector(selectCurrentPageCount);
+  const status = useAppSelector(selectCardsStatus);
   const dispatch = useAppDispatch();
   const pagination = {
     current: currentPage,
     defaultPageSize: pageCount,
-    pageSizeOptions: [8, 16, 32, 64, 128],
+    pageSizeOptions: [4, 8, 16, 32, 64],
     pageCount,
     total: cardsTotalCount,
   };
@@ -80,18 +82,19 @@ export const CardsTable: React.FC = () => {
     }
     dispatch(setChangeCardsPage({ currentPage: current }));
   };
-  const dataCard = cards.map(({ _id, updated, grade, question, answer }) => {
+  const dataCard = cards.map(({ _id, updated, question, grade, answer }) => {
     return {
       key: _id,
       question,
       answer,
       updated: new Date(updated).toLocaleDateString(),
-      grade,
+      grade: <Rate disabled value={grade} />,
     };
   });
 
   return (
     <Table
+      loading={status === 'loading'}
       columns={columns}
       onChange={onChangeHandle}
       dataSource={dataCard}

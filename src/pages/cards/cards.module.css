@@ -7,3 +7,6 @@
 .link {
     color: #000000;
 }
+.inputDebounceWrapper{
+    margin: 24px 0;
+}
