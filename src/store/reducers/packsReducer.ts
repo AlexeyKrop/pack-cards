@@ -52,7 +52,6 @@ export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
       );
     })
     .catch((err: AxiosError) => {
-      console.log(err);
       dispatch(setAppError({ error: err.message }));
     })
     .finally(() => {
@@ -62,16 +61,49 @@ export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
 
 export const createCardsPackTC =
   (params: CreateCardsPackParamsType): AppThunk =>
-  () => {
-    packsAPI.createCardsPack(params).then(res => console.log(res));
+  dispatch => {
+    dispatch(setPackStatus({ status: 'loading' }));
+    packsAPI
+      .createCardsPack(params)
+      .then(() => {
+        dispatch(setCardsPackTC());
+      })
+      .catch((err: AxiosError) => {
+        dispatch(setAppError({ error: err.message }));
+      })
+      .finally(() => {
+        dispatch(setPackStatus({ status: 'success' }));
+      });
   };
 export const editCardsPackTC =
   (params: EditCardsPackParamsType): AppThunk =>
-  () => {
-    packsAPI.editCardsPack(params).then(res => console.log(res));
+  dispatch => {
+    dispatch(setPackStatus({ status: 'loading' }));
+    packsAPI
+      .editCardsPack(params)
+      .then(() => {
+        dispatch(setCardsPackTC());
+      })
+      .catch((err: AxiosError) => {
+        dispatch(setAppError({ error: err.message }));
+      })
+      .finally(() => {
+        dispatch(setPackStatus({ status: 'success' }));
+      });
   };
 export const deleteCardsPackTC =
   (params: DeleteCardsPackParamsType): AppThunk =>
-  () => {
-    packsAPI.deleteCardsPack(params).then(res => console.log(res));
+  dispatch => {
+    dispatch(setPackStatus({ status: 'loading' }));
+    packsAPI
+      .deleteCardsPack(params)
+      .then(() => {
+        dispatch(setCardsPackTC());
+      })
+      .catch((err: AxiosError) => {
+        dispatch(setAppError({ error: err.message }));
+      })
+      .finally(() => {
+        dispatch(setPackStatus({ status: 'success' }));
+      });
   };
