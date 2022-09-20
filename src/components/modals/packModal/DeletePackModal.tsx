@@ -3,6 +3,7 @@ import React from 'react';
 import { Modal } from 'antd';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import { deleteCardsPackTC } from '../../../store/reducers/packsReducer';
 
 export type DeletePackModalType = {
@@ -18,7 +19,7 @@ export const DeletePackModal: React.FC<DeletePackModalType> = ({
   title,
 }) => {
   const dispatch = useAppDispatch();
-
+  const pack = useAppSelector(state => state.packs.cardPacks.find(p => p._id === id));
   const handleOk: () => void = () => {
     dispatch(deleteCardsPackTC({ id }));
   };
@@ -37,8 +38,8 @@ export const DeletePackModal: React.FC<DeletePackModalType> = ({
       onCancel={handleCancel}
     >
       <h4>
-        Do you really want to remove <strong>Pack Name</strong>? All cards will be
-        deleted.
+        Do you really want to remove <strong>{pack && pack.name}</strong>? All cards will
+        be deleted.
       </h4>
     </Modal>
   );
