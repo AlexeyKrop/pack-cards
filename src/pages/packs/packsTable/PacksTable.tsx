@@ -118,7 +118,7 @@ export const PacksTable: React.FC = () => {
         cards: cardsCount,
         updated: new Date(updated).toLocaleDateString(),
         created: user_name,
-        actions: <Actions _id={user_id} />,
+        actions: <Actions id={_id} user_id={user_id} />,
       };
     },
   );

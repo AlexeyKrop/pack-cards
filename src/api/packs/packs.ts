@@ -21,6 +21,21 @@ export const packsAPI = {
       },
     );
   },
+  editCardsPack(params: EditCardsPackParamsType) {
+    return instance.put<EditCardsPackParamsType, AxiosResponse<CardsPackResponseType>>(
+      `cards/pack`,
+      {
+        cardsPack: {
+          ...params,
+        },
+      },
+    );
+  },
+  deleteCardsPack(params: DeleteCardsPackParamsType) {
+    return instance.delete(`cards/pack`, {
+      params,
+    });
+  },
 };
 export type PackType = {
   _id: string;
@@ -67,4 +82,11 @@ export type CreateCardsPackParamsType = {
   name?: string;
   deckCover?: string;
   private?: boolean;
+};
+export type EditCardsPackParamsType = {
+  _id: string;
+  name?: string;
+};
+export type DeleteCardsPackParamsType = {
+  id: string;
 };

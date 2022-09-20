@@ -4,9 +4,9 @@ import { FilterOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
-import { CustomModal } from '../../components/customModal/CustomModal';
 import { DoubleRangeSlider } from '../../components/doubleRangeSlider/DoubleRangeSlider';
 import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
+import { AddPackModal } from '../../components/modals/packModal/AddPackModal';
 import { SkeletonButton } from '../../components/skeletonButton/SkeletonButton';
 import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
@@ -59,7 +59,7 @@ export const Packs: React.FC = () => {
     <div className={s.wrapper}>
       <div className={s.top}>
         <h2 className={s.title}>Packs list</h2>
-        <CustomModal />
+        <AddPackModal />
       </div>
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>

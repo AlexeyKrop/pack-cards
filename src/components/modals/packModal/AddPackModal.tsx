@@ -1,16 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
 
-import { Button, Input, Modal } from 'antd';
+import { Button, Checkbox, Input, Modal } from 'antd';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 
-import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
-import { createCardsPackTC } from '../../store/reducers/packsReducer';
+import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
+import { createCardsPackTC } from '../../../store/reducers/packsReducer';
 
-export const CustomModal: React.FC = () => {
+export const AddPackModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [modalText, setModalText] = useState('Content of the modal');
+  const [checked, setChecked] = useState(false);
 
   const showModal: () => void = () => {
     setOpen(true);
@@ -28,6 +28,11 @@ export const CustomModal: React.FC = () => {
 
     setValue(value);
   };
+  const onChange: (e: CheckboxChangeEvent) => void = e => {
+    const { checked } = e.target;
+
+    setChecked(checked);
+  };
 
   return (
     <>
@@ -39,9 +44,12 @@ export const CustomModal: React.FC = () => {
           onChange={onChangeInputValue}
           value={value}
           bordered={false}
-          style={{ borderBottom: '2px solid #000000', opacity: 0.2 }}
+          style={{ borderBottom: '2px solid #000000', opacity: 0.2, marginBottom: 30 }}
           placeholder="Name Pack"
         />
+        <Checkbox checked={checked} onChange={onChange}>
+          Private pack
+        </Checkbox>
       </Modal>
     </>
   );

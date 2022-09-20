@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import { CreateCardsPackParamsType, packsAPI, PackType } from '../../api/packs/packs';
+import {
+  CreateCardsPackParamsType,
+  DeleteCardsPackParamsType,
+  EditCardsPackParamsType,
+  packsAPI,
+  PackType,
+} from '../../api/packs/packs';
 import { AppThunk } from '../store';
 
 import { RequestStatusType, setAppError } from './appReducer';
@@ -58,4 +64,14 @@ export const createCardsPackTC =
   (params: CreateCardsPackParamsType): AppThunk =>
   () => {
     packsAPI.createCardsPack(params).then(res => console.log(res));
+  };
+export const editCardsPackTC =
+  (params: EditCardsPackParamsType): AppThunk =>
+  () => {
+    packsAPI.editCardsPack(params).then(res => console.log(res));
+  };
+export const deleteCardsPackTC =
+  (params: DeleteCardsPackParamsType): AppThunk =>
+  () => {
+    packsAPI.deleteCardsPack(params).then(res => console.log(res));
   };
