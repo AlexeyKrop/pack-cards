@@ -8,14 +8,12 @@ import s from './avatar.module.css';
 
 type AvatarType = {
   width?: string;
-  name?: string;
   mode?: 'profile' | 'header';
 };
 
-export const Avatar: React.FC<AvatarType> = ({ mode, width, name }) => {
+export const Avatar: React.FC<AvatarType> = ({ mode, width }) => {
   return (
     <div className={s.block}>
-      {mode === 'header' && <p style={{ margin: '0 5px' }}>{name}</p>}
       <img style={{ width }} src={avatar} alt="avatar" />
       {mode === 'profile' && (
         <div className={s.circle}>

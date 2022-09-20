@@ -7,17 +7,19 @@ export type SkeletonButtonType = {
   active?: boolean;
   buttonShape?: 'circle' | 'round' | 'square' | 'default';
   width?: number | string;
+  margin?: number | string;
 };
 export const SkeletonButton: React.FC<SkeletonButtonType> = ({
   active,
   size,
   buttonShape,
   width,
+  margin,
 }) => {
   return (
     <div>
       <Skeleton.Button
-        style={{ width }}
+        style={{ width, margin }}
         active={active}
         size={size}
         shape={buttonShape}

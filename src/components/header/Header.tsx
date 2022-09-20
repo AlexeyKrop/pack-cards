@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { LoginOutlined, UserOutlined } from '@ant-design/icons';
-import { Dropdown, Menu } from 'antd';
+import { Avatar, Dropdown, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg';
+import avatar from '../../assets/profile/avatar.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
-import { Avatar } from '../../pages/profile/avatar/Avatar';
+// import { Avatar } from '../../pages/profile/avatar/Avatar';
 import { PATH } from '../../routing/Pages';
 import { logoutTC } from '../../store/reducers/authReducer';
 import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
@@ -54,11 +55,15 @@ const Header: React.FC = () => {
           </div>
           {isLoggedIn && (
             <Dropdown.Button
-              type="text"
-              overlay={menu}
+              className={s.btnBlock}
               placement="bottomLeft"
-              icon={<Avatar mode="header" name={user.name} width="36px" />}
-            />
+              type="text"
+              size="large"
+              icon={<Avatar size={42} src={avatar} />}
+              overlay={menu}
+            >
+              {user.name}
+            </Dropdown.Button>
           )}
         </div>
       </div>

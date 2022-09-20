@@ -49,7 +49,7 @@ export const ToggleButton: React.FC<ToggleButtonType> = ({
 
   return (
     <Radio.Group
-      size="large"
+      size="middle"
       options={options}
       onChange={onChange}
       value={btnValue}

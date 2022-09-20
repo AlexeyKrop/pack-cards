@@ -84,9 +84,10 @@ export const Packs: React.FC = () => {
           <DoubleRangeSlider disabled={status === 'loading'} className={s.slider} />
         </div>
         {status === 'loading' ? (
-          <SkeletonButton size="large" />
+          <SkeletonButton size="large" margin="25px 0" />
         ) : (
           <Button
+            style={{ margin: '25px 0' }}
             type="primary"
             icon={<FilterOutlined />}
             size="middle"

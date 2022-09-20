@@ -19,7 +19,6 @@
 }
 .wrapper{
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
@@ -37,7 +36,9 @@
     line-height: 24px;
     color: #000000;
 }
-
-.block span {
-    border-bottom: 1px dashed #000000
+.btnBlock {
+    max-width: 120px;
+    width: 100%;
+    align-items: baseline;
+    justify-content: space-between;
 }
