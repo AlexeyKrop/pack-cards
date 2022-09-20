@@ -50,12 +50,10 @@ export const setCardsPackTC = (): AppThunk => (dispatch, getState) => {
       dispatch(
         setCardPacksTotalCount({ cardPacksTotalCount: res.data.cardPacksTotalCount }),
       );
+      dispatch(setPackStatus({ status: 'success' }));
     })
     .catch((err: AxiosError) => {
       dispatch(setAppError({ error: err.message }));
-    })
-    .finally(() => {
-      dispatch(setPackStatus({ status: 'success' }));
     });
 };
 

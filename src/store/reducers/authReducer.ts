@@ -16,8 +16,8 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setIsLoggedIn: (state, action: PayloadAction<{ value: boolean }>) => {
-      state.isLoggedIn = action.payload.value;
+    setIsLoggedIn: (state, action: PayloadAction<{ login: boolean }>) => {
+      state.isLoggedIn = action.payload.login;
     },
   },
 });
@@ -35,17 +35,22 @@ export const loginTC =
       .login(loginParams)
       .then(res => {
         dispatch(setUserProfile({ user: res.data }));
-        dispatch(setIsLoggedIn({ value: true }));
-        dispatch(setAppStatus({ status: 'success' }));
+        dispatch(setIsLoggedIn({ login: true }));
       })
       .catch((err: AxiosError<{ error: string }>) =>
         dispatch(setAppError({ error: err.response?.data.error })),
-      );
+      )
+      .finally(() => dispatch(setAppStatus({ status: 'success' })));
   };
 export const logoutTC = (): AppThunk => dispatch => {
   dispatch(setAppStatus({ status: 'loading' }));
-  authAPI.logout().then(() => {
-    dispatch(setIsLoggedIn({ value: false }));
-    dispatch(setAppStatus({ status: 'success' }));
-  });
+  authAPI
+    .logout()
+    .then(() => {
+      dispatch(setIsLoggedIn({ login: false }));
+      dispatch(setAppStatus({ status: 'success' }));
+    })
+    .catch((err: AxiosError<{ error: string }>) => {
+      dispatch(setAppError({ error: err.message }));
+    });
 };

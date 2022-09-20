@@ -30,7 +30,7 @@ export const setRegistrationTC =
     registrationAPI.createRegistration(registrationParams).then(res => {
       if (res.data.addedUser) {
         dispatch(setRegistration({ value: true }));
-        dispatch(setIsLoggedIn({ value: true }));
+        dispatch(setIsLoggedIn({ login: true }));
       } else if (res.data.error) {
         dispatch(setAppError({ error: res.data.error }));
       }

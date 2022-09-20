@@ -36,12 +36,12 @@ export const { setAppInitial, setAppStatus, setAppError } = appSlice.actions;
 // THUNK
 
 export const appInitializedTC = (): AppThunk => dispatch => {
-  dispatch(setAppStatus({ status: 'loading' }));
+  // dispatch(setAppStatus({ status: 'loading' }));
   authAPI
     .me()
     .then(res => {
       dispatch(setUserProfile({ user: res.data }));
-      dispatch(setIsLoggedIn({ value: true }));
+      dispatch(setIsLoggedIn({ login: true }));
       dispatch(setAppStatus({ status: 'success' }));
     })
     .catch((err: AxiosError<UserType>) => {

@@ -10,10 +10,11 @@ import { useAppDispatch } from './hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from './hooks/useAppSelector/useAppSelector';
 import { Pages } from './routing/Pages';
 import { appInitializedTC } from './store/reducers/appReducer';
+import { selectAppInitialized } from './store/selectors/selectApp/selectAppInitialized';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const initialized = useAppSelector(state => state.app.initialized);
+  const initialized = useAppSelector(selectAppInitialized);
 
   useEffect(() => {
     dispatch(appInitializedTC());

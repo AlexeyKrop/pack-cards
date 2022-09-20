@@ -19,6 +19,12 @@ export const EditPackModal: React.FC<EditPackModalType> = ({
   title,
 }) => {
   const dispatch = useAppDispatch();
+
+  // const selectPack = createSelector(cardsPacks, packs => packs.filter(p => p._id === id));
+  //
+  // console.log(cardsPacks);
+  // const pack = useAppSelector(state => state.packs.cardPacks.find(p => p._id === id));
+
   const [value, setValue] = useState('');
   const [checked, setChecked] = useState(false);
 
