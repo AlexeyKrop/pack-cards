@@ -39,7 +39,6 @@ export const Cards: React.FC = () => {
 
     dispatch(setCardsCardTC(cardsPackID));
   }, [dispatch, page, cardsPack_id, pageSizeCount, sortCards]);
-
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }
@@ -52,7 +51,7 @@ export const Cards: React.FC = () => {
       </NavLink>
       <div className={s.top}>
         <h2 className={s.title}>Friend’s Packs</h2>
-        <Button type="primary">Learn to pack</Button>
+        <Button type="primary">Add new card</Button>
       </div>
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>

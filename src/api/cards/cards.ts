@@ -11,6 +11,27 @@ export const cardsAPI = {
       },
     );
   },
+  createCardsCard(params: AddCardsParamsType) {
+    return instance.post(`cards/card`, {
+      card: {
+        ...params,
+      },
+    });
+  },
+  editCardsCard(params: EditCardsParamsType) {
+    return instance.put(`cards/card`, {
+      card: {
+        ...params,
+      },
+    });
+  },
+  deleteCardsCard(id: string) {
+    return instance.delete(`/cards/card`, {
+      params: {
+        id,
+      },
+    });
+  },
 };
 export type CardsParamsType = {
   cardAnswer?: string;
@@ -50,12 +71,20 @@ export type CardsCardResponseType = {
   tokenDeathTime: number;
 };
 
-export type PacksParamsType = {
-  packName?: string;
-  min?: number;
-  max?: number;
-  sortPacks?: string;
-  page?: number | undefined;
-  pageCount?: number | undefined;
-  user_id?: string;
+export type AddCardsParamsType = {
+  cardsPack_id: string;
+  question?: string;
+  answer?: string;
+  grade?: number;
+  shots?: number;
+  answerImg?: string;
+  questionImg?: string;
+  questionVideo?: string;
+  answerVideo?: string;
+};
+
+export type EditCardsParamsType = {
+  _id: string;
+  question: string;
+  comments: string;
 };

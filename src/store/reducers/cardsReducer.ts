@@ -9,6 +9,7 @@ import { RequestStatusType, setAppError } from './appReducer';
 const initialState = {
   cards: [] as CardType[],
   cardsTotalCount: 3,
+  packUserId: '',
   cardsStatus: 'idle' as RequestStatusType,
 };
 const cardsSlice = createSlice({

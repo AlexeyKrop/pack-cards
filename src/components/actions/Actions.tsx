@@ -16,8 +16,8 @@ type ActionsType = {
 };
 export const Actions: React.FC<ActionsType> = ({ user_id, id }) => {
   const user = useAppSelector(selectUser);
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const userID = user._id;
   const openEditPackModal: () => void = () => {
     setOpenEditModal(true);

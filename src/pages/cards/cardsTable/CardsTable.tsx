@@ -86,6 +86,7 @@ export const CardsTable: React.FC = () => {
     dispatch(setChangeCardsPageSize({ pageCount: pageSize }));
     dispatch(setChangeCardsPage({ currentPage: current }));
   };
+
   const dataCard = cards.map(({ _id, updated, question, grade, answer }) => {
     return {
       key: _id,
