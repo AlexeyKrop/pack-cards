@@ -15,6 +15,7 @@ export type InputDebounceType = {
   inputValue?: string;
   changeInputValue?: (value: string) => void;
 };
+
 export const InputDebounce: React.FC<InputDebounceType> = ({
   inputValue,
   changeInputValue,

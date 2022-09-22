@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { FilterOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
 import { Navigate } from 'react-router-dom';
 
-import { DoubleRangeSlider } from '../../components/doubleRangeSlider/DoubleRangeSlider';
-import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
+import { FilterBlock } from '../../components/filterBlock/FilterBlock';
 import { AddPackModal } from '../../components/modals/packModal/AddPackModal';
-import { SkeletonButton } from '../../components/skeletonButton/SkeletonButton';
-import { ToggleButton } from '../../components/toggleButton/ToggleButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
-import { setResetFilter } from '../../store/reducers/packsParamsReducer';
 import { setCardsPackTC } from '../../store/reducers/packsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
-import { selectPacksStatus } from '../../store/selectors/selectPacks/selectPacksStatus';
 import {
   selectCurrentPageCount,
   selectPageSizeCount,
@@ -31,7 +24,6 @@ import { PacksTable } from './packsTable/PacksTable';
 
 export const Packs: React.FC = () => {
   const dispatch = useAppDispatch();
-  const status = useAppSelector(selectPacksStatus);
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const page = useAppSelector(selectCurrentPageCount);
   const pageSizeCount = useAppSelector(selectPageSizeCount);
@@ -40,8 +32,6 @@ export const Packs: React.FC = () => {
   const min = useAppSelector(selectSetFilterForMinCountCards);
   const max = useAppSelector(selectSetFilterForMaxCountCards);
   const sortPacks = useAppSelector(selectSortPacksCards);
-  const [myAllSortBtnValue, setMyAllSortBtnValue] = useState<string>('All');
-  const [searchPackNameInputValue, setSearchPackNameInputValue] = useState<string>('');
 
   useEffect(() => {
     dispatch(setCardsPackTC());
@@ -49,11 +39,6 @@ export const Packs: React.FC = () => {
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }
-  const onClickResetFilter: () => void = () => {
-    dispatch(setResetFilter());
-    setMyAllSortBtnValue('All');
-    setSearchPackNameInputValue('');
-  };
 
   return (
     <div className={s.wrapper}>
@@ -61,42 +46,7 @@ export const Packs: React.FC = () => {
         <h2 className={s.title}>Packs list</h2>
         <AddPackModal />
       </div>
-      <div className={s.filterBlock}>
-        <div className={s.inputDebounceWrapper}>
-          <h3>Search</h3>
-          <InputDebounce
-            disabled={status === 'loading'}
-            inputValue={searchPackNameInputValue}
-            changeInputValue={setSearchPackNameInputValue}
-            placeholder="Provide your text"
-          />
-        </div>
-        <div className={s.toggleButtonWrapper}>
-          <h3>Show packs cards</h3>
-          <ToggleButton
-            disabled={status === 'loading'}
-            btnValue={myAllSortBtnValue}
-            toggleCallback={setMyAllSortBtnValue}
-          />
-        </div>
-        <div className={s.doubleRangeSliderWrapper}>
-          <h3>Number of cards</h3>
-          <DoubleRangeSlider disabled={status === 'loading'} className={s.slider} />
-        </div>
-        {status === 'loading' ? (
-          <SkeletonButton size="large" margin="25px 0" />
-        ) : (
-          <Button
-            style={{ margin: '25px 0' }}
-            type="primary"
-            icon={<FilterOutlined />}
-            size="middle"
-            onClick={onClickResetFilter}
-          >
-            Reset filter
-          </Button>
-        )}
-      </div>
+      <FilterBlock />
       <PacksTable />
     </div>
   );
