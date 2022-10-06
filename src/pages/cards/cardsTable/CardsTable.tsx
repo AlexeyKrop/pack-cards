@@ -3,6 +3,7 @@ import React from 'react';
 import { Rate, Table, TableProps } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 
+import { ActionsCards } from '../../../components/actionsCards/ActionsCards';
 import { useAppDispatch } from '../../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector/useAppSelector';
 import {
@@ -87,13 +88,23 @@ export const CardsTable: React.FC = () => {
     dispatch(setChangeCardsPage({ currentPage: current }));
   };
 
-  const dataCard = cards.map(({ _id, updated, question, grade, answer }) => {
+  const dataCard = cards.map(({ _id, updated, question, grade, answer, user_id }) => {
     return {
       key: _id,
       question,
       answer,
       updated: new Date(updated).toLocaleDateString(),
-      grade: <Rate disabled value={grade} />,
+      grade: (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Rate disabled value={grade} /> <ActionsCards user_id={user_id} id={_id} />
+        </div>
+      ),
     };
   });
 

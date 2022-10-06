@@ -8,7 +8,7 @@ import { InputDebounce } from '../../components/inputDebounce/InputDebounce';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 import { PATH } from '../../routing/Pages';
-import { setCardsCardTC } from '../../store/reducers/cardsReducer';
+import { createCardsCardTC, setCardsCardTC } from '../../store/reducers/cardsReducer';
 import { selectLoggedIn } from '../../store/selectors/selectAuth/selectLoggedIn';
 import { selectCardsStatus } from '../../store/selectors/selectCards/selectCardsStatus';
 import {
@@ -29,7 +29,12 @@ export const Cards: React.FC = () => {
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const pageSizeCount = useAppSelector(selectCardsPageSizeCount);
   const sortCards = useAppSelector(selectSortCards);
+  const cardPack = useAppSelector(state =>
+    state.packs.cardPacks.find(cardPack => cardPack._id === cardsPack_id),
+  );
+
   const dispatch = useAppDispatch();
+
   const getCardIdFromLocalStorage: () => string = () => {
     return restoreState<string>('cardsId', '');
   };
@@ -42,6 +47,9 @@ export const Cards: React.FC = () => {
   if (!isLoggedIn) {
     return <Navigate to={PATH.LOGIN} />;
   }
+  const onClickHandle: () => void = () => {
+    dispatch(createCardsCardTC({ question: 'hello', answer: 'hi', cardsPack_id }));
+  };
 
   return (
     <div className={s.wrapper}>
@@ -50,8 +58,10 @@ export const Cards: React.FC = () => {
         <span>Back to Packs List</span>
       </NavLink>
       <div className={s.top}>
-        <h2 className={s.title}>Friend’s Packs</h2>
-        <Button type="primary">Add new card</Button>
+        <h2 className={s.title}>{cardPack ? cardPack.name : 'Packs'}</h2>
+        <Button onClick={onClickHandle} type="primary">
+          Add new card
+        </Button>
       </div>
       <div className={s.filterBlock}>
         <div className={s.inputDebounceWrapper}>
