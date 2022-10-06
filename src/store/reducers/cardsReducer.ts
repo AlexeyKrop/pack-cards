@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 
-import { cardsAPI, CardType } from '../../api/cards/cards';
+import {
+  AddCardsParamsType,
+  cardsAPI,
+  CardType,
+  EditCardsParamsType,
+} from '../../api/cards/cards';
+import { restoreState } from '../../utils/localStorage';
 import { AppThunk } from '../store';
 
 import { RequestStatusType, setAppError } from './appReducer';
@@ -49,5 +54,34 @@ export const setCardsCardTC =
         dispatch(setCardsStatus({ status: 'success' }));
         dispatch(setCardsCardTotalCount({ cardsTotalCount: res.data.cardsTotalCount }));
       })
-      .catch((err: AxiosError) => dispatch(setAppError({ error: err.message })));
+      .catch(err => dispatch(setAppError({ error: err.response.data.error })));
+  };
+export const createCardsCardTC =
+  (params: AddCardsParamsType): AppThunk =>
+  dispatch => {
+    cardsAPI
+      .createCardsCard(params)
+      .then(() => {
+        dispatch(setCardsCardTC(params.cardsPack_id));
+      })
+      .catch(err => {
+        dispatch(setAppError({ error: err.response.data.error }));
+      });
+  };
+export const editCardsCardTC =
+  (params: EditCardsParamsType): AppThunk =>
+  dispatch => {
+    const getCardIdFromLocalStorage: () => string = () => {
+      return restoreState<string>('cardsId', '');
+    };
+    const cardsPackID = getCardIdFromLocalStorage();
+
+    cardsAPI
+      .editCardsCard(params)
+      .then(() => {
+        dispatch(setCardsCardTC(cardsPackID));
+      })
+      .catch(err => {
+        dispatch(setAppError({ error: err.response.data.error }));
+      });
   };
