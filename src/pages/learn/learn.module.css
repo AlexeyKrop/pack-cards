@@ -1,0 +1,39 @@
+.wrapper{
+    width: 100%;
+    max-width: 439px;
+    min-height: 492px;
+    align-self: center;
+    justify-self: center;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+.content{
+    padding: 30px;
+}
+.link{
+    color: #000000;
+}
+.grade{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.navigateText{
+    display: inline-block;
+    margin-left: 10px;
+}
+.title{
+    text-align: center;
+}
+.btn{
+    margin-bottom: 10px;
+}
+.questions, .answer{
+    margin-bottom: 25px;
+}
+
+.button{
+    margin-top: 20px;
+}

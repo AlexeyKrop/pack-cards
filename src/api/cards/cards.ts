@@ -32,11 +32,14 @@ export const cardsAPI = {
       },
     });
   },
+  grade(card_id: string | undefined, grade: number) {
+    return instance.put(`/cards/grade`, { card_id, grade });
+  },
 };
 export type CardsParamsType = {
   cardAnswer?: string;
   cardQuestion?: string;
-  cardsPack_id: string;
+  cardsPack_id: string | undefined;
   min?: number;
   max?: number;
   sortCards?: string;
@@ -50,8 +53,8 @@ export type CardType = {
   grade: number;
   shots: number;
   user_id: string;
-  created: Date;
-  updated: Date;
+  created: Date | string;
+  updated: Date | string;
   _id: string;
 };
 

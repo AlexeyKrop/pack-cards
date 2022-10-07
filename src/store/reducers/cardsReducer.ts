@@ -33,16 +33,22 @@ const cardsSlice = createSlice({
     setCardsStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
       state.cardsStatus = action.payload.status;
     },
+    changeGrade: (
+      state,
+      action: PayloadAction<{ card_id: string | undefined; grade: number }>,
+    ) => {
+      state.cards.find(card => card.cardsPack_id === action.payload.card_id);
+    },
   },
 });
 
 export const cardsReducer = cardsSlice.reducer;
-export const { setCardsCard, setCardsCardTotalCount, setCardsStatus } =
+export const { setCardsCard, setCardsCardTotalCount, setCardsStatus, changeGrade } =
   cardsSlice.actions;
 
 // THUNK
 export const setCardsCardTC =
-  (cardsPack_id: string): AppThunk =>
+  (cardsPack_id: string | undefined): AppThunk =>
   (dispatch, getState) => {
     const { cardsParams } = getState();
 
@@ -84,4 +90,29 @@ export const editCardsCardTC =
       .catch(err => {
         dispatch(setAppError({ error: err.response.data.error }));
       });
+  };
+export const deleteCardsCardTC =
+  (id: string): AppThunk =>
+  dispatch => {
+    const getCardIdFromLocalStorage: () => string = () => {
+      return restoreState<string>('cardsId', '');
+    };
+    const cardsPackID = getCardIdFromLocalStorage();
+
+    cardsAPI
+      .deleteCardsCard(id)
+      .then(() => {
+        dispatch(setCardsCardTC(cardsPackID));
+      })
+      .catch(err => {
+        dispatch(setAppError({ error: err.response.data.error }));
+      });
+  };
+export const changeGradeTC =
+  (card_id: string | undefined, grade: number): AppThunk =>
+  dispatch => {
+    cardsAPI.grade(card_id, grade).then(res => {
+      console.log(res);
+      dispatch(changeGrade({ card_id, grade }));
+    });
   };

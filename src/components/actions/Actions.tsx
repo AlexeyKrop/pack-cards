@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 import { DeleteOutlined, EditOutlined, ReadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
+import { PATH } from '../../routing/Pages';
 import { selectUser } from '../../store/selectors/selectProfile/selectUser';
 import { DeletePackModal } from '../modals/packModal/DeletePackModal';
 import { EditPackModal } from '../modals/packModal/EditPackModal';
@@ -18,12 +20,16 @@ export const Actions: React.FC<ActionsType> = ({ user_id, id }) => {
   const user = useAppSelector(selectUser);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+  const navigate = useNavigate();
   const userID = user._id;
   const openEditPackModal: () => void = () => {
     setOpenEditModal(true);
   };
   const openDeletePackModal: () => void = () => {
     setOpenDeleteModal(true);
+  };
+  const onClickLearnPack: () => void = () => {
+    navigate(`${PATH.LEARN}${id}`);
   };
 
   return (
@@ -40,7 +46,12 @@ export const Actions: React.FC<ActionsType> = ({ user_id, id }) => {
         open={openDeleteModal}
         setOpen={setOpenDeleteModal}
       />
-      <Button type="text" icon={<ReadOutlined className={s.icon} />} size="middle" />
+      <Button
+        onClick={onClickLearnPack}
+        type="text"
+        icon={<ReadOutlined className={s.icon} />}
+        size="middle"
+      />
       {userID === user_id && (
         <>
           <Button
