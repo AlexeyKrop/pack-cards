@@ -85,7 +85,7 @@ export const Learn: React.FC = () => {
       <div className={s.wrapper}>
         <div className={s.content}>
           <div className={s.questions}>
-            <strong>Question</strong>: {card.question}
+            <strong>Question</strong>: {card.question}?
           </div>
           <div>
             <Button className={s.btn} onClick={() => setIsChecked(true)}>
@@ -95,7 +95,7 @@ export const Learn: React.FC = () => {
           {isChecked && (
             <>
               <div className={s.answer}>
-                <strong>Answer</strong>:{card.answer}?
+                <strong>Answer</strong>:{card.answer}
               </div>
               <div className={s.grade}>
                 {grades.map((g, i) => (
@@ -103,9 +103,6 @@ export const Learn: React.FC = () => {
                   <Radio.Group key={`grade-${i}`} onChange={onChange} value={value}>
                     <Radio value={i}>{g}</Radio>
                   </Radio.Group>
-                  // <Button key={`grade-${i}`} onClick={() => {}}>
-                  //   {g}
-                  // </Button>
                 ))}{' '}
               </div>
               <Button className={s.button} onClick={onNext}>
