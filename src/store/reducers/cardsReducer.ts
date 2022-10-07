@@ -54,7 +54,7 @@ export const setCardsCardTC =
 
     dispatch(setCardsStatus({ status: 'loading' }));
     cardsAPI
-      .setCardsCard({ ...cardsParams, cardsPack_id })
+      .setCardsCard({ ...cardsParams, cardsPack_id, pageCount: Infinity })
       .then(res => {
         dispatch(setCardsCard({ cards: res.data.cards }));
         dispatch(setCardsStatus({ status: 'success' }));
@@ -112,7 +112,6 @@ export const changeGradeTC =
   (card_id: string | undefined, grade: number): AppThunk =>
   dispatch => {
     cardsAPI.grade(card_id, grade).then(res => {
-      console.log(res);
-      dispatch(changeGrade({ card_id, grade }));
+      dispatch(setCardsCard({ cards: res.data.updatedGrade }));
     });
   };

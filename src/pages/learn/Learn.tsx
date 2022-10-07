@@ -63,12 +63,10 @@ export const Learn: React.FC = () => {
 
   const onNext: () => void = () => {
     setIsChecked(false);
-
+    dispatch(changeGradeTC(card._id, value));
     if (cards.length > 0) {
       setCard(getCard(cards));
     }
-
-    dispatch(changeGradeTC(card._id, value));
   };
   const onChange: (e: RadioChangeEvent) => void = e => {
     setValue(+e.target.value);
@@ -101,9 +99,9 @@ export const Learn: React.FC = () => {
                 {grades.map((g, i) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <Radio.Group key={`grade-${i}`} onChange={onChange} value={value}>
-                    <Radio value={i}>{g}</Radio>
+                    <Radio value={i + 1}>{g}</Radio>
                   </Radio.Group>
-                ))}{' '}
+                ))}
               </div>
               <Button className={s.button} onClick={onNext}>
                 next
