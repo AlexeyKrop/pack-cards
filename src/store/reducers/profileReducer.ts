@@ -27,10 +27,10 @@ export const profileReducer = profileSlice.reducer;
 export const { setUserProfile, setDisabled } = profileSlice.actions;
 
 export const updateUserProfileTC =
-  (name: string): AppThunk =>
+  (name: string, avatar?: string): AppThunk =>
   dispatch => {
     dispatch(setDisabled({ isDisabled: true }));
-    authAPI.updateName(name).then(res => {
+    authAPI.updateName(name, avatar).then(res => {
       dispatch(setDisabled({ isDisabled: false }));
       dispatch(setUserProfile({ user: res.data.updatedUser }));
     });

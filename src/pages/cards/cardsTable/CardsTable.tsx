@@ -88,25 +88,27 @@ export const CardsTable: React.FC = () => {
     dispatch(setChangeCardsPage({ currentPage: current }));
   };
 
-  const dataCard = cards.map(({ _id, updated, question, grade, answer, user_id }) => {
-    return {
-      key: _id,
-      question,
-      answer,
-      updated: new Date(updated).toLocaleDateString(),
-      grade: (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Rate disabled value={grade} /> <ActionsCards user_id={user_id} id={_id} />
-        </div>
-      ),
-    };
-  });
+  const dataCard =
+    cards &&
+    cards.map(({ _id, updated, question, grade, answer, user_id }) => {
+      return {
+        key: _id,
+        question,
+        answer,
+        updated: new Date(updated).toLocaleDateString(),
+        grade: (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Rate disabled value={grade} /> <ActionsCards user_id={user_id} id={_id} />
+          </div>
+        ),
+      };
+    });
 
   return (
     <Table

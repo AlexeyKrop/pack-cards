@@ -5,7 +5,6 @@ import { Avatar, Dropdown, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg';
-import avatar from '../../assets/profile/avatar.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector/useAppSelector';
 // import { Avatar } from '../../pages/profile/avatar/Avatar';
@@ -59,7 +58,7 @@ const Header: React.FC = () => {
               placement="bottomLeft"
               type="text"
               size="large"
-              icon={<Avatar size={42} src={avatar} />}
+              icon={<Avatar size={42} src={user.avatar} />}
               overlay={menu}
             >
               {user.name}
