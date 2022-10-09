@@ -113,6 +113,7 @@ export const PacksTable: React.FC = () => {
     dispatch(setChangePageSize({ pageCount: pageSize }));
     dispatch(setChangePage({ currentPage: current }));
   };
+
   const dataCard = cardPacks.map(
     ({ _id, name, cardsCount, updated, user_name, user_id, deckCover }) => {
       return {

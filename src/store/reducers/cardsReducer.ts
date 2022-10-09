@@ -110,8 +110,7 @@ export const deleteCardsCardTC =
   };
 export const changeGradeTC =
   (card_id: string | undefined, grade: number): AppThunk =>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dispatch => {
-    cardsAPI.grade(card_id, grade).then(res => {
-      dispatch(setCardsCard({ cards: res.data.updatedGrade }));
-    });
+    cardsAPI.grade(card_id, grade).then(() => {});
   };

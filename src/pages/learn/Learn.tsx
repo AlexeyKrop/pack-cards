@@ -18,6 +18,7 @@ const getCard: (cards: CardType[]) => any = cards => {
   // eslint-disable-next-line no-magic-numbers
   const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
   const rand = Math.random() * sum;
+
   const res = cards.reduce(
     (acc: { sum: number; id: number }, card, i) => {
       // eslint-disable-next-line no-magic-numbers
