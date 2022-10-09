@@ -33,13 +33,6 @@ type DataType = {
 };
 const columns = [
   {
-    title: 'Cover',
-    dataIndex: 'cover',
-    key: 'cover',
-    textWrap: 'word-break',
-    ellipsis: true,
-  },
-  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
@@ -115,10 +108,9 @@ export const PacksTable: React.FC = () => {
   };
 
   const dataCard = cardPacks.map(
-    ({ _id, name, cardsCount, updated, user_name, user_id, deckCover }) => {
+    ({ _id, name, cardsCount, updated, user_name, user_id }) => {
       return {
         key: _id,
-        cover: <img src={deckCover} alt="cover" />,
         name: (
           <Button type="text" onClick={() => onClickHandle(_id)}>
             {name}
