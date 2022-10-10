@@ -1,7 +1,7 @@
-Learning Cards
+# Learning Cards
 This project was bootstrapped with Create React App.
 
-Technology stack
+### Technology stack
 TypeScript
 React
 Redux-toolkit
