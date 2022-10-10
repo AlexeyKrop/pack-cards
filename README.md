@@ -2,17 +2,18 @@
 This project was bootstrapped with Create React App.
 
 ## Technology stack
-### TypeScript
-### React
-### Redux-toolkit
-### React-Redux
-### Redux-Thunk
-### React-Router-dom
-### Axios
-### Antd
-### Formik
-### HTML
-### CSS
+1. TypeScript
+2. React
+3. Redux-toolkit
+4. React-Redux
+5. Redux-Thunk
+6. React-Router-dom
+7. Axios
+8. Antd
+9. Formik
+10. HTML
+11. CSS
+12. git
 ## About
 Learning cards for online training using the question-answer system with the ability to create your own training modules (card decks), as well as their expansion (creating new cards), editing and privacy settings. The project also implemented a learning process with a rating system for assessing the knowledge of the material covered and a counter for passing training cards. The project has the ability to search for educational cards, as well as two-level filtering.
 
